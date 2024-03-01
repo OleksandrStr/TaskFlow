@@ -32,3 +32,24 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
         next(error);
     }
 };
+
+export const login = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const errors = {emailOrPassword: 'Invalid email or password'};
+        const user = await UserModel.findOne({email: req.body.email}).select('+password');
+
+        if (!user) {
+            return res.status(400).json(errors);
+        }
+
+        const isPasswordEqual = await user.validatePassword(req.body.password);
+
+        if (!isPasswordEqual) {
+            return res.status(400).json(errors);
+        }
+
+        res.send(normalizeUser(user));
+    } catch (error) {
+        next(error);
+    }
+};

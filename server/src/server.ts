@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/users', usersController.register);
+app.post('/api/users/login', usersController.login);
 
 mongoose.connect('mongodb://localhost:27017/trello').then(() => {
     console.log('Connected to MongoDB');
