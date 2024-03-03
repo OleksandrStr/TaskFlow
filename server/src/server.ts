@@ -3,6 +3,7 @@ import {createServer} from 'http';
 import mongoose from "mongoose";
 import * as usersController from './controllers/users';
 import bodyParser from 'body-parser';
+import authMiddleware from './middlewares/auth'
 
 const app = express();
 const httpServer = createServer(app);
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/users', usersController.register);
 app.post('/api/users/login', usersController.login);
+app.get('/api/user', authMiddleware, usersController.currentUser);
 
 mongoose.connect('mongodb://localhost:27017/trello').then(() => {
     console.log('Connected to MongoDB');
