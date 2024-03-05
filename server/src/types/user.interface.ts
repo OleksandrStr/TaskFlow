@@ -10,3 +10,8 @@ export interface User {
 export interface UserDocument extends User, Document {
     validatePassword(password: string): Promise<boolean>;
 }
+
+export interface TokenData {
+    id: string,
+    email: string
+}
