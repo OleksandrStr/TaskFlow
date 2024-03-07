@@ -5,10 +5,12 @@ import * as usersController from './controllers/users';
 import bodyParser from 'body-parser';
 import authMiddleware from './middlewares/auth'
 import {mongodbUri, serverPort} from "./config";
+import cors from 'cors';
 
 const app = express();
 const httpServer = createServer(app);
 
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
