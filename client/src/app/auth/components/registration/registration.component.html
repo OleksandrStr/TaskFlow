@@ -1,14 +1,28 @@
 <div class="registration">
   <a routerLink="/">
-    <img src="./assets/trello-logo.svg" class="registration__logo">
+    <img src="./assets/trello-logo.svg" class="registration__logo" />
   </a>
   <div class="registration__form">
     <div class="registration__form-header">Register to Trello</div>
     <div class="registration__form-errors"></div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <input formControlName="email" type="email" placeholder="Email" class="registration__form-input">
-      <input formControlName="username" placeholder="Username" class="registration__form-input">
-      <input formControlName="password" type="password" placeholder="Password" class="registration__form-input">
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="Email"
+        class="registration__form-input"
+      />
+      <input
+        formControlName="username"
+        placeholder="Username"
+        class="registration__form-input"
+      />
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="Password"
+        class="registration__form-input"
+      />
       <button type="submit" class="registration__form-button">Register</button>
     </form>
     <div class="registration__form-links">

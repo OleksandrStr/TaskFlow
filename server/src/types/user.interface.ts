@@ -1,17 +1,17 @@
-import {Document} from "mongoose";
+import { Document } from 'mongoose';
 
 export interface User {
-    email: string;
-    username: string;
-    password: string;
-    createdAt: Date;
+  email: string;
+  username: string;
+  password: string;
+  createdAt: Date;
 }
 
 export interface UserDocument extends User, Document {
-    validatePassword(password: string): Promise<boolean>;
+  validatePassword(password: string): Promise<boolean>;
 }
 
 export interface TokenData {
-    id: string,
-    email: string
+  id: string;
+  email: string;
 }
