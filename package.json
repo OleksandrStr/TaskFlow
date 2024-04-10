@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepare": "husky",
     "prettier": "prettier --config ./.prettierrc --list-different ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "husky": "^9.0.11",
     "prettier": "^3.2.5"
   }
 }
