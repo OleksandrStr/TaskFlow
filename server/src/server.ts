@@ -23,9 +23,9 @@ app.post('/api/users/login', usersController.login);
 app.get('/api/user', authMiddleware, usersController.currentUser);
 
 mongoose.connect(mongodbUri).then(() => {
-  console.log('Connected to MongoDB');
+  console.info('Connected to MongoDB');
 
   httpServer.listen(serverPort, () => {
-    console.log(`Server is running on port ${serverPort}`);
+    console.info(`Server is running on port ${serverPort}`);
   });
 });

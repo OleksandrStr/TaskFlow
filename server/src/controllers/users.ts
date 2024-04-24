@@ -1,12 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import UserModel from '../models/user';
-import { TokenData, UserDocument } from '../types/user.interface';
+import {
+  CurrentUserInterface,
+  TokenData,
+  UserDocument,
+} from '../types/user.interface';
 import { Error } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
 import { ExpressRequestInterface } from '../types/expressRequest.interface';
 
-const normalizeUser = (user: UserDocument) => {
+const normalizeUser = (user: UserDocument): CurrentUserInterface => {
   const data: TokenData = { id: user.id, email: user.email };
   const token = jwt.sign(data, jwtSecretKey);
   return {
@@ -21,7 +25,7 @@ export const register = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
     const newUser = new UserModel({
       email: req.body.email,
@@ -33,9 +37,10 @@ export const register = async (
   } catch (error) {
     if (error instanceof Error.ValidationError) {
       const messages = Object.values(error.errors).map((err) => err.message);
-      return res.status(400).json(messages);
+      res.status(400).json(messages);
+    } else {
+      next(error);
     }
-    next(error);
   }
 };
 
@@ -43,7 +48,7 @@ export const login = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
     const errors = { emailOrPassword: 'Invalid email or password' };
     const user = await UserModel.findOne({ email: req.body.email }).select(
@@ -51,13 +56,15 @@ export const login = async (
     );
 
     if (!user) {
-      return res.status(400).json(errors);
+      res.status(400).json(errors);
+      return;
     }
 
     const isPasswordEqual = await user.validatePassword(req.body.password);
 
     if (!isPasswordEqual) {
-      return res.status(400).json(errors);
+      res.status(400).json(errors);
+      return;
     }
 
     res.send(normalizeUser(user));
@@ -66,9 +73,13 @@ export const login = async (
   }
 };
 
-export const currentUser = (req: ExpressRequestInterface, res: Response) => {
+export const currentUser = (
+  req: ExpressRequestInterface,
+  res: Response
+): void => {
   if (!req.user) {
-    return res.sendStatus(401);
+    res.sendStatus(401);
+  } else {
+    res.send(normalizeUser(req.user));
   }
-  res.send(normalizeUser(req.user));
 };
