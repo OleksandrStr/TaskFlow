@@ -1,0 +1,34 @@
+{
+  "root": true,
+  "ignorePatterns": ["node_modules/**/*", "dist/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "plugins": ["change-detection-strategy", "rxjs"],
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/use-lifecycle-interface": "error",
+        "change-detection-strategy/on-push": "error",
+        "rxjs/no-ignored-notifier": "error",
+        "rxjs/no-ignored-observable": "error",
+        "rxjs/no-subject-unsubscribe": "error",
+        "rxjs/no-ignored-subscription": "error",
+        "rxjs/no-ignored-replay-buffer": "error",
+        "rxjs/no-connectable": "error",
+        "rxjs/no-async-subscribe": "error"
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    }
+  ]
+}

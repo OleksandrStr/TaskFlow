@@ -6,7 +6,9 @@
   "scripts": {
     "prepare": "husky",
     "prettier": "prettier --config ./.prettierrc --list-different .",
-    "lint": "eslint \"**/*.ts\"",
+    "lint:root": "eslint \"**/*.ts\"",
+    "lint:client": "cd client && yarn lint",
+    "lint": "yarn lint:root && yarn lint:client",
     "stylelint": "stylelint \"**/*.scss\"",
     "stylelint:fix": "stylelint --fix \"**/*.scss\""
   },
