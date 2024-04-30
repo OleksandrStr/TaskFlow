@@ -11,7 +11,7 @@
     "lint": "yarn lint:root && yarn lint:client",
     "lint:fix": "yarn lint:root --fix && yarn lint:client --fix",
     "stylelint": "stylelint \"**/*.scss\"",
-    "stylelint:fix": "stylelint --fix \"**/*.scss\""
+    "stylelint:fix": "yarn stylelint --fix"
   },
   "author": "",
   "license": "ISC",
