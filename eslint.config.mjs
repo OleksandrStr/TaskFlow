@@ -1,11 +1,16 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import globals from 'globals';
+import unicorn from 'eslint-plugin-unicorn';
 
 export default [
   {
     files: ['**/*.ts'],
+    plugins: {
+      unicorn,
+    },
     rules: {
+      'unicorn/filename-case': 'error',
       '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/no-inferrable-types': 'error',
