@@ -8,7 +8,7 @@ import {
 import { Error } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
-import { ExpressRequestInterface } from '../types/expressRequest.interface';
+import { ExpressRequestInterface } from '../types/express-request.interface';
 
 const normalizeUser = (user: UserDocument): CurrentUserInterface => {
   const data: TokenData = { id: user.id, email: user.email };
