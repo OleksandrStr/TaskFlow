@@ -1,1 +1,1 @@
-yarn prettier && yarn stylelint
+yarn prettier && yarn lint && yarn stylelint
