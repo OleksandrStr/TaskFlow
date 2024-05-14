@@ -1,5 +1,4 @@
 import express from 'express';
-import { createServer } from 'http';
 import mongoose from 'mongoose';
 import * as usersController from './controllers/users';
 import bodyParser from 'body-parser';
@@ -8,13 +7,12 @@ import { mongodbUri, serverPort } from './config';
 import cors from 'cors';
 
 const app = express();
-const httpServer = createServer(app);
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send('Server is UP');
 });
 
@@ -25,7 +23,7 @@ app.get('/api/user', authMiddleware, usersController.currentUser);
 mongoose.connect(mongodbUri).then(() => {
   console.info('Connected to MongoDB');
 
-  httpServer.listen(serverPort, () => {
+  app.listen(serverPort, () => {
     console.info(`Server is running on port ${serverPort}`);
   });
 });
