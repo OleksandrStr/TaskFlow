@@ -12,14 +12,9 @@ export default async (
 ): Promise<void> => {
   try {
     const authHeader = req.headers.authorization;
-
-    if (!authHeader) {
-      res.sendStatus(401);
-      return;
-    }
-    const token = authHeader.split(' ')[1];
-    const data = jwt.verify(token, jwtSecretKey) as TokenData;
-    const user = await UserModel.findById(data.id);
+    const [_bearer, token] = authHeader.split(' ');
+    const tokenData = jwt.verify(token, jwtSecretKey) as TokenData;
+    const user = await UserModel.findById(tokenData.id);
 
     if (!user) {
       res.sendStatus(401);
@@ -28,7 +23,7 @@ export default async (
 
     req.user = user;
     next();
-  } catch (error) {
+  } catch (_error) {
     res.sendStatus(401);
   }
 };
