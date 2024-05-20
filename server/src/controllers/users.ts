@@ -11,8 +11,8 @@ import { jwtSecretKey } from '../config';
 import { ExpressRequestInterface } from '../types/express-request.interface';
 
 const normalizeUser = (user: UserDocument): CurrentUserInterface => {
-  const data: TokenData = { id: user.id, email: user.email };
-  const token = jwt.sign(data, jwtSecretKey);
+  const tokenData: TokenData = { id: user.id, email: user.email };
+  const token = jwt.sign(tokenData, jwtSecretKey);
   return {
     email: user.email,
     username: user.username,
@@ -33,11 +33,14 @@ export const register = async (
       password: req.body.password,
     });
     const savedUser = await newUser.save();
+
     res.send(normalizeUser(savedUser));
   } catch (error) {
     if (error instanceof Error.ValidationError) {
-      const messages = Object.values(error.errors).map((err) => err.message);
-      res.status(400).json(messages);
+      const errorMessages = Object.values(error.errors).map(
+        (err) => err.message
+      );
+      res.status(400).json(errorMessages);
     } else {
       next(error);
     }
@@ -50,20 +53,14 @@ export const login = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const errors = { emailOrPassword: 'Invalid email or password' };
+    const error = { error: 'Invalid email or password' };
     const user = await UserModel.findOne({ email: req.body.email }).select(
       '+password'
     );
+    const isPasswordEqual = await user?.validatePassword(req.body.password);
 
-    if (!user) {
-      res.status(400).json(errors);
-      return;
-    }
-
-    const isPasswordEqual = await user.validatePassword(req.body.password);
-
-    if (!isPasswordEqual) {
-      res.status(400).json(errors);
+    if (!user || !isPasswordEqual) {
+      res.status(401).json(error);
       return;
     }
 
@@ -73,13 +70,9 @@ export const login = async (
   }
 };
 
-export const currentUser = (
+export const getCurrentUser = (
   req: ExpressRequestInterface,
   res: Response
 ): void => {
-  if (!req.user) {
-    res.sendStatus(401);
-  } else {
-    res.send(normalizeUser(req.user));
-  }
+  res.send(normalizeUser(req.user));
 };
