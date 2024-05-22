@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { CurrentUserInterface } from '../types/current-user.interface';
+import { CurrentUser } from '../types/user.interface';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  currentUser$ = new BehaviorSubject<CurrentUserInterface | null | undefined>(
-    undefined
-  );
+  currentUser$ = new BehaviorSubject<CurrentUser | null | undefined>(undefined);
 
-  getCurrentUser(): Observable<CurrentUserInterface> {
+  getCurrentUser(): Observable<CurrentUser> {
     const url = environment.apiUrl + '/user';
-    return this.http.get<CurrentUserInterface>(url);
+    return this.http.get<CurrentUser>(url);
   }
 
-  setCurrentUser(currentUser: CurrentUserInterface | null): void {
+  setCurrentUser(currentUser: CurrentUser | null): void {
     this.currentUser$.next(currentUser);
   }
 }

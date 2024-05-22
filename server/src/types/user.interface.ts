@@ -11,7 +11,7 @@ export interface UserDocument extends User, Document {
   validatePassword(password: string): Promise<boolean>;
 }
 
-export interface CurrentUserInterface {
+export interface CurrentUser {
   id: string;
   token: string;
   username: string;
