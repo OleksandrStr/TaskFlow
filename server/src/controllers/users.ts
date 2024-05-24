@@ -4,7 +4,7 @@ import { CurrentUser, TokenData, UserDocument } from '../types/user.interface';
 import { Error } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
-import { ExpressRequestInterface } from '../types/express-request.interface';
+import { ExpressRequest } from '../types/express-request.interface';
 
 const normalizeUser = (user: UserDocument): CurrentUser => {
   const tokenData: TokenData = { id: user.id, email: user.email };
@@ -66,9 +66,6 @@ export const login = async (
   }
 };
 
-export const getCurrentUser = (
-  req: ExpressRequestInterface,
-  res: Response
-): void => {
+export const getCurrentUser = (req: ExpressRequest, res: Response): void => {
   res.send(normalizeUser(req.user));
 };

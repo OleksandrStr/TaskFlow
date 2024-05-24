@@ -2,11 +2,11 @@ import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
 import UserModel from '../models/user';
-import { ExpressRequestInterface } from '../types/express-request.interface';
+import { ExpressRequest } from '../types/express-request.interface';
 import { TokenData } from '../types/user.interface';
 
 export default async (
-  req: ExpressRequestInterface,
+  req: ExpressRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
