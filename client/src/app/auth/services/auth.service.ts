@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  currentUser$ = new BehaviorSubject<CurrentUser | null | undefined>(undefined);
+  currentUser$ = new BehaviorSubject<CurrentUser | null>(null);
 
   getCurrentUser(): Observable<CurrentUser> {
     const url = environment.apiUrl + '/user';
