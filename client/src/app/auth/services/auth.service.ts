@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { CurrentUser } from '../../../../../shared/interfaces/user.interface';
 import { environment } from '../../../environments/environment';
 import { RegisterRequest } from '../types/register-request.interface';
+import { LoginRequest } from '../types/login-request.interface';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +15,11 @@ export class AuthService {
   register(registerRequest: RegisterRequest): Observable<CurrentUser> {
     const url = environment.apiUrl + '/users';
     return this.http.post<CurrentUser>(url, registerRequest);
+  }
+
+  login(loginRequest: LoginRequest): Observable<CurrentUser> {
+    const url = environment.apiUrl + '/users/login';
+    return this.http.post<CurrentUser>(url, loginRequest);
   }
 
   getCurrentUser(): Observable<CurrentUser> {
