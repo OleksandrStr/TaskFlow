@@ -58,6 +58,10 @@
     font-weight: 300;
   }
 
+  &__left-part {
+    margin-right: 40px;
+  }
+
   &--team {
     color: #2c3e50;
 
@@ -68,5 +72,13 @@
 
   &--information {
     color: #2c3e50;
+  }
+
+  &--workflow {
+    color: #2c3e50;
+
+    .home-container__image {
+      max-width: 450px;
+    }
   }
 }
