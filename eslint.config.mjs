@@ -4,6 +4,8 @@ import globals from 'globals';
 import unicorn from 'eslint-plugin-unicorn';
 
 export default [
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
   {
     files: ['**/*.ts'],
     plugins: {
@@ -42,6 +44,7 @@ export default [
       'no-debugger': 'error',
       'no-irregular-whitespace': 'error',
       'no-var': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
     languageOptions: {
       parserOptions: {
@@ -50,6 +53,4 @@ export default [
       globals: { ...globals.browser, ...globals.node },
     },
   },
-  eslint.configs.recommended,
-  ...tseslint.configs.recommended,
 ];
