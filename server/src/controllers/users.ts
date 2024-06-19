@@ -14,7 +14,7 @@ const normalizeUser = (user: UserDocument): CurrentUser => {
     email: user.email,
     username: user.username,
     id: user.id,
-    token,
+    token: `Bearer ${token}`,
   };
 };
 
