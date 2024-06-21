@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,7 +20,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes), ReactiveFormsModule, CommonModule],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   declarations: [RegistrationComponent, LoginComponent],
 })
 export class AuthModule {}
