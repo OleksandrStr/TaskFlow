@@ -1417,6 +1417,28 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@ngrx/effects@^18.0.1":
+  version "18.0.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-18.0.1.tgz#09ed0b32dc2677eb634fa19c2a8125628e11ae61"
+  integrity sha512-ESxJYx31uABixtnWcuDY+HLKyqXKABpPG3LPDMyZrj7lIdjCaTk471QMhRZOme8QQKzlJt0drGfzFo3FM+QYuA==
+  dependencies:
+    "@ngrx/operators" "18.0.1"
+    tslib "^2.0.0"
+
+"@ngrx/operators@18.0.1":
+  version "18.0.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/operators/-/operators-18.0.1.tgz#fd127dce1bccb27824b77149fbb4f8b56d2ad8a9"
+  integrity sha512-M+QMrHNKgcuiLaRGZxJ4aQi5/OCRfKC4+T/63dsHyLFZ53/FFpF6a/ytSO1Q+tzOplZ5o99S+i8FVaZqNQ3LmQ==
+  dependencies:
+    tslib "^2.3.0"
+
+"@ngrx/store@^18.0.1":
+  version "18.0.1"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-18.0.1.tgz#61a6fcd06d1a219f2d4d135faea23f035008d6d8"
+  integrity sha512-TxZiQz06fGSxQ0clYfzkH4NCr6tfa8A7zqzkvvOOK1ZezOHHsk0vZJJtgxQcKUqAQxPpbp5+Z7YR8P/Fuid7GQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngtools/webpack@13.3.11":
   version "13.3.11"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-13.3.11.tgz#3295a7ae2b93f2cc5e197b72efb0f5b9c63c4685"
