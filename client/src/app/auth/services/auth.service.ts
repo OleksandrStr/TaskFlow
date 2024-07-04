@@ -5,17 +5,22 @@ import { CurrentUser } from '../../../../../shared/interfaces/user.interface';
 import { environment } from '../../../environments/environment';
 import { RegisterRequest } from '../types/register-request.interface';
 import { LoginRequest } from '../types/login-request.interface';
+import { Store } from '@ngrx/store';
+import { AuthState } from '../store/reducers/auth.reducer';
+import { AuthActions } from '../store/actions/auth.actions';
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private store: Store<AuthState>,
+    private http: HttpClient
+  ) {}
 
   currentUser$ = new BehaviorSubject<CurrentUser | null>(null);
   isLoggedIn$ = this.currentUser$.pipe(map(Boolean));
 
-  register(registerRequest: RegisterRequest): Observable<CurrentUser> {
-    const url = environment.apiUrl + '/users';
-    return this.http.post<CurrentUser>(url, registerRequest);
+  register(registerRequest: RegisterRequest): void {
+    this.store.dispatch(AuthActions.RegisterUser(registerRequest));
   }
 
   login(loginRequest: LoginRequest): Observable<CurrentUser> {

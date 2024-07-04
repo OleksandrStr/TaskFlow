@@ -6,6 +6,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/effects/auth.effects';
+import { StoreModule } from '@ngrx/store';
+import { AUTH_FEATURE, AuthReducer } from './store/reducers/auth.reducer';
 
 const routes: Routes = [
   {
@@ -19,7 +23,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), ReactiveFormsModule, CommonModule],
+  imports: [
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    CommonModule,
+    StoreModule.forFeature(AUTH_FEATURE, AuthReducer),
+    EffectsModule.forFeature(AuthEffects),
+  ],
   providers: [AuthService, AuthGuard],
   declarations: [RegistrationComponent, LoginComponent],
 })
