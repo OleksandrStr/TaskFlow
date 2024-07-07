@@ -28,9 +28,8 @@ export class AuthService {
     return this.http.post<CurrentUser>(url, loginRequest);
   }
 
-  getCurrentUser(): Observable<CurrentUser> {
-    const url = environment.apiUrl + '/user';
-    return this.http.get<CurrentUser>(url);
+  getCurrentUser(): void {
+    this.store.dispatch(AuthActions.GetCurrentUser());
   }
 
   setCurrentUser(currentUser: CurrentUser | null): void {

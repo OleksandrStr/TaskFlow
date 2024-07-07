@@ -19,11 +19,15 @@ const initialAuthState: AuthState = {
 
 export const AuthReducer = createReducer(
   initialAuthState,
-  on(AuthActions.RegisterUserSuccess, (_state, currentUser) => ({
-    user: {
-      id: currentUser.id,
-      username: currentUser.username,
-      email: currentUser.email,
-    },
-  }))
+  on(
+    AuthActions.RegisterUserSuccess,
+    AuthActions.GetCurrentUserSuccess,
+    (_state, currentUser) => ({
+      user: {
+        id: currentUser.id,
+        username: currentUser.username,
+        email: currentUser.email,
+      },
+    })
+  )
 );

@@ -17,6 +17,17 @@ export class AuthEffects {
     private http: HttpClient
   ) {}
 
+  currentUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.GetCurrentUser),
+      switchMap(() => {
+        const url = environment.apiUrl + '/user';
+        return this.http.get<CurrentUser>(url);
+      }),
+      map((currentUser) => AuthActions.GetCurrentUserSuccess(currentUser))
+    )
+  );
+
   register$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.RegisterUser),
