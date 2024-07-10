@@ -17,6 +17,38 @@ export class AuthEffects {
     private http: HttpClient
   ) {}
 
+  registerUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.RegisterUser),
+      switchMap((registerRequest) => {
+        const url = environment.apiUrl + '/users';
+        return this.http.post<CurrentUser>(url, registerRequest);
+      }),
+      map((currentUser) => {
+        this.authService.setToken(currentUser);
+        this.router.navigateByUrl('/');
+
+        return AuthActions.RegisterUserSuccess(currentUser);
+      })
+    )
+  );
+
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.Login),
+      switchMap((loginRequest) => {
+        const url = environment.apiUrl + '/users/login';
+        return this.http.post<CurrentUser>(url, loginRequest);
+      }),
+      map((currentUser) => {
+        this.authService.setToken(currentUser);
+        this.router.navigateByUrl('/');
+
+        return AuthActions.LoginSuccess(currentUser);
+      })
+    )
+  );
+
   currentUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.GetCurrentUser),
@@ -25,22 +57,6 @@ export class AuthEffects {
         return this.http.get<CurrentUser>(url);
       }),
       map((currentUser) => AuthActions.GetCurrentUserSuccess(currentUser))
-    )
-  );
-
-  register$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.RegisterUser),
-      switchMap((action) => {
-        const url = environment.apiUrl + '/users';
-        return this.http.post<CurrentUser>(url, action);
-      }),
-      map((currentUser) => {
-        this.authService.setToken(currentUser);
-        this.router.navigateByUrl('/');
-
-        return AuthActions.RegisterUserSuccess(currentUser);
-      })
     )
   );
 }

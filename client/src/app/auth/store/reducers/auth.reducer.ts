@@ -21,6 +21,7 @@ export const AuthReducer = createReducer(
   initialAuthState,
   on(
     AuthActions.RegisterUserSuccess,
+    AuthActions.LoginSuccess,
     AuthActions.GetCurrentUserSuccess,
     (_state, currentUser) => ({
       user: {

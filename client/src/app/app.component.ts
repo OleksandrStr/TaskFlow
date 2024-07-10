@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/services/auth.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +7,6 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  private subscriptions = new Subscription();
-
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
