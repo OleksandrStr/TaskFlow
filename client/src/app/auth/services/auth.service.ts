@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { CurrentUser } from '../../../../../shared/interfaces/user.interface';
 import { RegisterRequest } from '../types/register-request.interface';
 import { LoginRequest } from '../types/login-request.interface';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../store/reducers/auth.reducer';
 import { AuthActions } from '../store/actions/auth.actions';
-import { getUser } from '../store/selectors/auth.selectors';
+import { getAuthError, getUser } from '../store/selectors/auth.selectors';
 
 @Injectable()
 export class AuthService {
@@ -25,6 +25,10 @@ export class AuthService {
 
   getCurrentUser(): void {
     this.store.dispatch(AuthActions.GetCurrentUser());
+  }
+
+  getError(): Observable<string> {
+    return this.store.select(getAuthError);
   }
 
   setToken(currentUser: CurrentUser): void {

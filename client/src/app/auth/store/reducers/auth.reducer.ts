@@ -11,10 +11,12 @@ export interface UserState {
 
 export interface AuthState {
   user: UserState;
+  error: string;
 }
 
 const initialAuthState: AuthState = {
   user: null,
+  error: '',
 };
 
 export const AuthReducer = createReducer(
@@ -29,6 +31,11 @@ export const AuthReducer = createReducer(
         username: currentUser.username,
         email: currentUser.email,
       },
+      error: '',
     })
-  )
+  ),
+  on(AuthActions.RegisterUserError, (state, { err }) => ({
+    ...state,
+    error: err.error.join(', '),
+  }))
 );

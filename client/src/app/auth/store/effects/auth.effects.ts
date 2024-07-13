@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { CurrentUser } from '../../../../../../shared/interfaces/user.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { AuthActions } from '../actions/auth.actions';
@@ -29,7 +29,10 @@ export class AuthEffects {
         this.router.navigateByUrl('/');
 
         return AuthActions.RegisterUserSuccess(currentUser);
-      })
+      }),
+      catchError((err: HttpErrorResponse) =>
+        of(AuthActions.RegisterUserError({ err }))
+      )
     )
   );
 

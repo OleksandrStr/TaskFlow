@@ -2,9 +2,11 @@ import { createAction, props } from '@ngrx/store';
 import { RegisterRequest } from '../../types/register-request.interface';
 import { CurrentUser } from '../../../../../../shared/interfaces/user.interface';
 import { LoginRequest } from '../../types/login-request.interface';
+import { HttpErrorResponse } from '@angular/common/http';
 
 const REGISTER_USER = '[Auth] Register User';
 const REGISTER_USER_SUCCESS = '[Auth] Register User Success';
+const REGISTER_USER_ERROR = '[Auth] Register User Error';
 
 const LOGIN = '[Auth] Login';
 const LOGIN_SUCCESS = '[Auth] Login Success';
@@ -16,6 +18,10 @@ const RegisterUser = createAction(REGISTER_USER, props<RegisterRequest>());
 const RegisterUserSuccess = createAction(
   REGISTER_USER_SUCCESS,
   props<CurrentUser>()
+);
+const RegisterUserError = createAction(
+  REGISTER_USER_ERROR,
+  props<{ err: HttpErrorResponse }>()
 );
 
 const Login = createAction(LOGIN, props<LoginRequest>());
@@ -30,6 +36,7 @@ const GetCurrentUserSuccess = createAction(
 export const AuthActions = {
   RegisterUser,
   RegisterUserSuccess,
+  RegisterUserError,
   Login,
   LoginSuccess,
   GetCurrentUser,

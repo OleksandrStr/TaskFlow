@@ -4,8 +4,8 @@
   </a>
   <div class="registration__form">
     <div class="registration__form-header">Register to Trello</div>
-    <div *ngIf="errorMessage" class="registration__form-error">
-      {{ errorMessage }}
+    <div *ngIf="error$ | async as error" class="registration__form-error">
+      {{ error }}
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <input
