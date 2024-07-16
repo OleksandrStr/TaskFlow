@@ -48,7 +48,10 @@ export class AuthEffects {
         this.router.navigateByUrl('/');
 
         return AuthActions.LoginSuccess(currentUser);
-      })
+      }),
+      catchError((err: HttpErrorResponse) =>
+        of(AuthActions.LoginError({ err }))
+      )
     )
   );
 

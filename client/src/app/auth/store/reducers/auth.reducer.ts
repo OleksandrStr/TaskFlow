@@ -34,8 +34,12 @@ export const AuthReducer = createReducer(
       error: '',
     })
   ),
-  on(AuthActions.RegisterUserError, (state, { err }) => ({
-    ...state,
-    error: err.error.join(', '),
-  }))
+  on(
+    AuthActions.RegisterUserError,
+    AuthActions.LoginError,
+    (state, { err }) => ({
+      ...state,
+      error: err.error.join(', '),
+    })
+  )
 );

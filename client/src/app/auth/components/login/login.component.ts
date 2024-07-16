@@ -12,7 +12,7 @@ export class LoginComponent {
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
-  errorMessage: string;
+  error$ = this.authService.getError();
 
   constructor(
     private fb: FormBuilder,

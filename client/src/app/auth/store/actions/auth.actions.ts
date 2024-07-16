@@ -10,6 +10,7 @@ const REGISTER_USER_ERROR = '[Auth] Register User Error';
 
 const LOGIN = '[Auth] Login';
 const LOGIN_SUCCESS = '[Auth] Login Success';
+const LOGIN_ERROR = '[Auth] Login Error';
 
 const GET_CURRENT_USER = '[Auth] Get Current User';
 const GET_CURRENT_USER_SUCCESS = '[Auth] Get Current User Success';
@@ -26,6 +27,10 @@ const RegisterUserError = createAction(
 
 const Login = createAction(LOGIN, props<LoginRequest>());
 const LoginSuccess = createAction(LOGIN_SUCCESS, props<CurrentUser>());
+const LoginError = createAction(
+  LOGIN_ERROR,
+  props<{ err: HttpErrorResponse }>()
+);
 
 const GetCurrentUser = createAction(GET_CURRENT_USER);
 const GetCurrentUserSuccess = createAction(
@@ -39,6 +44,7 @@ export const AuthActions = {
   RegisterUserError,
   Login,
   LoginSuccess,
+  LoginError,
   GetCurrentUser,
   GetCurrentUserSuccess,
 };
