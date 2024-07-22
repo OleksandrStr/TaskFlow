@@ -28,7 +28,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     CommonModule,
     StoreModule.forFeature(AUTH_FEATURE, AuthReducer),
-    EffectsModule.forFeature(AuthEffects),
+    EffectsModule.forFeature([AuthEffects]),
   ],
   providers: [AuthService, AuthGuard],
   declarations: [RegistrationComponent, LoginComponent],
