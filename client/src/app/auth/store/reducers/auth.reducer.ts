@@ -39,7 +39,7 @@ export const AuthReducer = createReducer(
     AuthActions.LoginError,
     (state, { err }) => ({
       ...state,
-      error: err.error.join(', '),
+      error: err.error.error || err.error.join(', '),
     })
   )
 );
