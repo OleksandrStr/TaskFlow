@@ -25,11 +25,11 @@ export const AuthReducer = createReducer(
     AuthActions.RegisterUserSuccess,
     AuthActions.LoginSuccess,
     AuthActions.GetCurrentUserSuccess,
-    (_state, currentUser) => ({
+    (_state, { payload }) => ({
       user: {
-        id: currentUser.id,
-        username: currentUser.username,
-        email: currentUser.email,
+        id: payload.id,
+        username: payload.username,
+        email: payload.email,
       },
       error: '',
     })

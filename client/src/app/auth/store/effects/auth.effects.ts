@@ -20,15 +20,15 @@ export class AuthEffects {
   registerUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.RegisterUser),
-      switchMap((registerRequest) => {
+      switchMap(({ payload }) => {
         const url = environment.apiUrl + '/users';
-        return this.http.post<CurrentUser>(url, registerRequest);
+        return this.http.post<CurrentUser>(url, payload);
       }),
       map((currentUser) => {
         this.authService.setToken(currentUser);
         this.router.navigateByUrl('/');
 
-        return AuthActions.RegisterUserSuccess(currentUser);
+        return AuthActions.RegisterUserSuccess({ payload: currentUser });
       }),
       catchError((err: HttpErrorResponse) =>
         of(AuthActions.RegisterUserError({ err }))
@@ -39,15 +39,15 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.Login),
-      switchMap((loginRequest) => {
+      switchMap(({ payload }) => {
         const url = environment.apiUrl + '/users/login';
-        return this.http.post<CurrentUser>(url, loginRequest);
+        return this.http.post<CurrentUser>(url, payload);
       }),
       map((currentUser) => {
         this.authService.setToken(currentUser);
         this.router.navigateByUrl('/');
 
-        return AuthActions.LoginSuccess(currentUser);
+        return AuthActions.LoginSuccess({ payload: currentUser });
       }),
       catchError((err: HttpErrorResponse) =>
         of(AuthActions.LoginError({ err }))
@@ -62,7 +62,9 @@ export class AuthEffects {
         const url = environment.apiUrl + '/user';
         return this.http.get<CurrentUser>(url);
       }),
-      map((currentUser) => AuthActions.GetCurrentUserSuccess(currentUser))
+      map((currentUser) =>
+        AuthActions.GetCurrentUserSuccess({ payload: currentUser })
+      )
     )
   );
 }

@@ -16,11 +16,11 @@ export class AuthService {
   isLoggedIn$ = this.currentUser$.pipe(map(Boolean));
 
   register(registerRequest: RegisterRequest): void {
-    this.store.dispatch(AuthActions.RegisterUser(registerRequest));
+    this.store.dispatch(AuthActions.RegisterUser({ payload: registerRequest }));
   }
 
   login(loginRequest: LoginRequest): void {
-    this.store.dispatch(AuthActions.Login(loginRequest));
+    this.store.dispatch(AuthActions.Login({ payload: loginRequest }));
   }
 
   getCurrentUser(): void {

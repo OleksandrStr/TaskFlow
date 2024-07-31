@@ -15,18 +15,24 @@ const LOGIN_ERROR = '[Auth] Login Error';
 const GET_CURRENT_USER = '[Auth] Get Current User';
 const GET_CURRENT_USER_SUCCESS = '[Auth] Get Current User Success';
 
-const RegisterUser = createAction(REGISTER_USER, props<RegisterRequest>());
+const RegisterUser = createAction(
+  REGISTER_USER,
+  props<{ payload: RegisterRequest }>()
+);
 const RegisterUserSuccess = createAction(
   REGISTER_USER_SUCCESS,
-  props<CurrentUser>()
+  props<{ payload: CurrentUser }>()
 );
 const RegisterUserError = createAction(
   REGISTER_USER_ERROR,
   props<{ err: HttpErrorResponse }>()
 );
 
-const Login = createAction(LOGIN, props<LoginRequest>());
-const LoginSuccess = createAction(LOGIN_SUCCESS, props<CurrentUser>());
+const Login = createAction(LOGIN, props<{ payload: LoginRequest }>());
+const LoginSuccess = createAction(
+  LOGIN_SUCCESS,
+  props<{ payload: CurrentUser }>()
+);
 const LoginError = createAction(
   LOGIN_ERROR,
   props<{ err: HttpErrorResponse }>()
@@ -35,7 +41,7 @@ const LoginError = createAction(
 const GetCurrentUser = createAction(GET_CURRENT_USER);
 const GetCurrentUserSuccess = createAction(
   GET_CURRENT_USER_SUCCESS,
-  props<CurrentUser>()
+  props<{ payload: CurrentUser }>()
 );
 
 export const AuthActions = {
