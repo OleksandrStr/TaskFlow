@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { AuthActions } from '../actions/auth.actions';
+import { AuthActions } from '../actions';
 
 export const AUTH_FEATURE = 'auth';
 

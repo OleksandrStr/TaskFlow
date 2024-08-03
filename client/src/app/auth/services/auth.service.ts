@@ -5,8 +5,8 @@ import { RegisterRequest } from '../types/register-request.interface';
 import { LoginRequest } from '../types/login-request.interface';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../store/reducers/auth.reducer';
-import { AuthActions } from '../store/actions/auth.actions';
 import { getAuthError, getUser } from '../store/selectors/auth.selectors';
+import { AuthActions } from '../store/actions';
 
 @Injectable()
 export class AuthService {

@@ -6,7 +6,7 @@ import { CurrentUser } from '../../../../../../shared/interfaces/user.interface'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { AuthActions } from '../actions/auth.actions';
+import { AuthActions } from '../actions';
 
 @Injectable()
 export class AuthEffects {
