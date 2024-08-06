@@ -5,14 +5,14 @@ import { RegisterRequest } from '../types/register-request.interface';
 import { LoginRequest } from '../types/login-request.interface';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../store/reducers/auth.reducer';
-import { getAuthError, getUser } from '../store/selectors/auth.selectors';
 import { AuthActions } from '../store/actions';
+import { AuthSelectors } from '../store/selectors';
 
 @Injectable()
 export class AuthService {
   constructor(private store: Store<AuthState>) {}
 
-  currentUser$ = this.store.select(getUser);
+  currentUser$ = this.store.select(AuthSelectors.getUser);
   isLoggedIn$ = this.currentUser$.pipe(map(Boolean));
 
   register(registerRequest: RegisterRequest): void {
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   getError(): Observable<string> {
-    return this.store.select(getAuthError);
+    return this.store.select(AuthSelectors.getAuthError);
   }
 
   setToken(currentUser: CurrentUser): void {
