@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AuthState } from '../store/reducers/auth.reducer';
 import { AuthActions } from '../store/actions';
 import { AuthSelectors } from '../store/selectors';
+import { AuthLocalStorageKey } from '../types/auth.enum';
 
 @Injectable()
 export class AuthService {
@@ -32,6 +33,6 @@ export class AuthService {
   }
 
   setToken(currentUser: CurrentUser): void {
-    localStorage.setItem('token', currentUser.token);
+    localStorage.setItem(AuthLocalStorageKey.AUTH_TOKEN, currentUser.token);
   }
 }
