@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { UserDocument } from './user.interface';
+import { UserDocument } from './user.model';
 
 export interface ExpressRequest extends Request {
   user?: UserDocument;

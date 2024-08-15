@@ -3,3 +3,8 @@ export interface RegisterRequest {
   username: string;
   password: string;
 }
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}

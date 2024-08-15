@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import UserModel from '../models/user';
-import { TokenData, UserDocument } from '../types/user.interface';
-import { CurrentUser } from '../../../shared/interfaces/user.interface';
+import { TokenData, UserDocument } from '../types/user.model';
+import { CurrentUser } from '../../../shared/models/user.model';
 import { Error } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
-import { ExpressRequest } from '../types/express-request.interface';
+import { ExpressRequest } from '../types/express.model';
 
 const normalizeUser = (user: UserDocument): CurrentUser => {
   const tokenData: TokenData = { id: user.id, email: user.email };

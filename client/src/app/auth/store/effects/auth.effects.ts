@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { CurrentUser } from '../../../../../../shared/interfaces/user.interface';
+import { CurrentUser } from '../../../../../../shared/models/user.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';

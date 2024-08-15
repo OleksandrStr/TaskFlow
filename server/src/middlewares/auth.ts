@@ -2,8 +2,8 @@ import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
 import UserModel from '../models/user';
-import { ExpressRequest } from '../types/express-request.interface';
-import { TokenData } from '../types/user.interface';
+import { ExpressRequest } from '../types/express.model';
+import { TokenData } from '../types/user.model';
 
 export default async (
   req: ExpressRequest,
