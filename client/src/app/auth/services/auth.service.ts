@@ -31,6 +31,10 @@ export class AuthService {
     return this.store.select(AuthSelectors.getAuthError);
   }
 
+  getToken(): string {
+    return localStorage.getItem(AuthLocalStorageKey.AUTH_TOKEN);
+  }
+
   setToken(currentUser: CurrentUser): void {
     localStorage.setItem(AuthLocalStorageKey.AUTH_TOKEN, currentUser.token);
   }
