@@ -11,6 +11,8 @@ const LOGIN = '[Auth] Login';
 const LOGIN_SUCCESS = '[Auth] Login Success';
 const LOGIN_ERROR = '[Auth] Login Error';
 
+const CLEAN_AUTH_ERROR = '[Auth] Clen Auth Error';
+
 const GET_CURRENT_USER = '[Auth] Get Current User';
 const GET_CURRENT_USER_SUCCESS = '[Auth] Get Current User Success';
 
@@ -36,6 +38,8 @@ export const LoginError = createAction(
   LOGIN_ERROR,
   props<{ err: HttpErrorResponse }>()
 );
+
+export const CleanAuthError = createAction(CLEAN_AUTH_ERROR);
 
 export const GetCurrentUser = createAction(GET_CURRENT_USER);
 export const GetCurrentUserSuccess = createAction(

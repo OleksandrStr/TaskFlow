@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -18,6 +18,10 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService
   ) {}
+
+  ngOnInit(): void {
+    this.authService.cleanError();
+  }
 
   onSubmit(): void {
     this.authService.login(this.form.value);

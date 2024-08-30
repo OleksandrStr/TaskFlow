@@ -31,6 +31,10 @@ export class AuthService {
     return this.store.select(AuthSelectors.getAuthError);
   }
 
+  cleanError(): void {
+    this.store.dispatch(AuthActions.CleanAuthError());
+  }
+
   getToken(): string {
     return localStorage.getItem(AuthLocalStorageKey.AUTH_TOKEN);
   }
