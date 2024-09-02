@@ -9,7 +9,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/effects/auth.effects';
 import { StoreModule } from '@ngrx/store';
-import { AUTH_FEATURE, AuthReducer } from './store/reducers/auth.reducer';
+import { AuthReducer } from './store/reducers/auth.reducer';
+import { AUTH_FEATURE } from './types/auth.model';
 
 const routes: Routes = [
   {
