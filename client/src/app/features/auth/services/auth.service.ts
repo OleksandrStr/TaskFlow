@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { CurrentUser } from '../../../../../shared/models/user.model';
 import { AuthState, LoginRequest, RegisterRequest } from '../types/auth.model';
 import { Store } from '@ngrx/store';
 import { AuthActions } from '../store/actions';
 import { AuthSelectors } from '../store/selectors';
 import { AuthLocalStorageKey } from '../types/auth.enum';
+import { CurrentUser } from '../../../../../../shared/models/user.model';
 
 @Injectable()
 export class AuthService {
