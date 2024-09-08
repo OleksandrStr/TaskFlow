@@ -1,0 +1,96 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+
+  &__logo {
+    display: block;
+    height: 43px;
+    margin: 40px auto;
+  }
+
+  &__form {
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 25px 40px 32px;
+    box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+    max-width: 400px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-header {
+      text-align: center;
+      color: #5e6c84;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+      line-height: 28px;
+      margin-top: 10px;
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+
+    &-error {
+      color: #eb5a46;
+      font-size: 14px;
+      line-height: 1.333;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    &-input {
+      font-weight: 500;
+      font-size: 14px;
+      width: 100%;
+      background-color: #fafbfc;
+      border: 2px solid #dfe1e6;
+      box-sizing: border-box;
+      border-radius: 3px;
+      height: 44px;
+      padding: 7px;
+      transition:
+        background-color 0.2s ease-in-out 0s,
+        border-color 0.2s ease-in-out 0s;
+      margin: 0 0 1.2em;
+    }
+
+    &-button {
+      background: #5aac44;
+      border-radius: 0.3em;
+      color: #fff;
+      display: inline-block;
+      font-weight: bold;
+      margin-bottom: 0.8em;
+      font-size: 16px;
+      padding: 0.6em 1.3em;
+      position: relative;
+      text-decoration: none;
+      border: 0;
+      width: 100%;
+      cursor: pointer;
+      font-family: Arial, Helvetica, sans-serif;
+
+      &:hover {
+        background-color: #61bd4f;
+      }
+    }
+
+    &-links {
+      text-align: center;
+      font-size: 14px;
+      display: flex;
+      padding: 0;
+      justify-content: center;
+      list-style-type: disc;
+    }
+
+    &-link {
+      text-decoration: none;
+      color: #0052cc;
+    }
+  }
+}

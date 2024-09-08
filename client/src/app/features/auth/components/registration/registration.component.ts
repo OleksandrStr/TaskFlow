@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'auth-registration',
   templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationComponent implements OnInit {
