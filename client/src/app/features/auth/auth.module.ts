@@ -10,7 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/effects/auth.effects';
 import { StoreModule } from '@ngrx/store';
 import { AuthReducer } from './store/reducers/auth.reducer';
-import { AUTH_FEATURE } from './types/auth.model';
+import { AUTH_FEATURE } from './models/auth.interface';
 
 const routes: Routes = [
   {
