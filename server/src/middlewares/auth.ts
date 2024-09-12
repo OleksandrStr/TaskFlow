@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
-import UserModel from '../models/user';
+import UserModel from '../db-models/user.db-model';
 import { ExpressRequest } from '../types/express.model';
 import { TokenData } from '../types/user.model';
 

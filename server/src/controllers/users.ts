@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import UserModel from '../models/user';
+import UserModel from '../db-models/user.db-model';
 import { TokenData, UserDocument } from '../types/user.model';
 import { CurrentUser } from '../../../shared/models/user.model';
 import { Error } from 'mongoose';
