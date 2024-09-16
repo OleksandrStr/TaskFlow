@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { AuthActions } from '../store/actions';
 import { AuthSelectors } from '../store/selectors';
 import { AuthLocalStorageKey } from '../models/auth.enum';
-import { CurrentUser } from '../../../../../../shared/models/user.model';
+import { CurrentUser } from '../../../../../../shared/models/user.interface';
 
 @Injectable()
 export class AuthService {

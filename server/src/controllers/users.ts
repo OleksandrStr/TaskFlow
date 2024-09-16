@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import UserModel from '../db-models/user.db-model';
 import { TokenData, UserDocument } from '../models/user.interface';
-import { CurrentUser } from '../../../shared/models/user.model';
+import { CurrentUser } from '../../../shared/models/user.interface';
 import { Error } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';

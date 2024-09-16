@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CurrentUser } from '../../../../../../../shared/models/user.model';
+import { CurrentUser } from '../../../../../../../shared/models/user.interface';
 import { LoginRequest, RegisterRequest } from '../../models/auth.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 
