@@ -1,8 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import * as usersController from './controllers/users';
+import * as userController from './controllers/user.controller';
 import bodyParser from 'body-parser';
-import authMiddleware from './middlewares/auth';
+import authMiddleware from './middlewares/auth.middleware';
 import { mongodbUri, serverPort } from './config';
 import cors from 'cors';
 
@@ -16,9 +16,9 @@ app.get('/', (_req, res) => {
   res.send('Server is UP');
 });
 
-app.post('/api/users', usersController.register);
-app.post('/api/users/login', usersController.login);
-app.get('/api/user', authMiddleware, usersController.getCurrentUser);
+app.post('/api/users', userController.register);
+app.post('/api/users/login', userController.login);
+app.get('/api/user', authMiddleware, userController.getCurrentUser);
 
 mongoose.connect(mongodbUri).then(() => {
   console.info('Connected to MongoDB');
