@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services';
 import { Router } from '@angular/router';
 import { AuthActions } from '../actions';
 import { CurrentUser } from '../../../../../../../shared/models/user.interface';

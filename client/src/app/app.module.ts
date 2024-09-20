@@ -9,8 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { AuthModule } from './features/auth/auth.module';
-import { AuthInterceptor } from './features/auth/interceptors/auth.interceptor';
+import { AuthInterceptor, AuthModule } from './features';
 
 const storeDevtools: ModuleWithProviders<StoreDevtoolsModule> | [] =
   environment.production ? [] : StoreDevtoolsModule.instrument();

@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { CurrentUser } from '../../../../../../../shared/models/user.interface';
-import { LoginRequest, RegisterRequest } from '../../models/auth.interface';
+import { LoginRequest, RegisterRequest } from '../../models';
 import { HttpErrorResponse } from '@angular/common/http';
 
 const REGISTER_USER = '[Auth] Register User';

@@ -1,3 +1,1 @@
-import * as AuthActions from './auth.actions';
-
-export { AuthActions };
+export * as AuthActions from './auth.actions';

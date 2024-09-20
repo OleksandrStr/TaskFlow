@@ -1,16 +1,14 @@
-import { NgModule } from '@angular/core';
-import { AuthService } from './services/auth.service';
-import { RegistrationComponent } from './components/registration/registration.component';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent, RegistrationComponent } from './components';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './components/login/login.component';
-import { AuthGuard } from './guards/auth.guard';
-import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './store/effects/auth.effects';
 import { StoreModule } from '@ngrx/store';
-import { AuthReducer } from './store/reducers/auth.reducer';
-import { AUTH_FEATURE } from './models/auth.interface';
+import { AUTH_FEATURE } from './models';
+import { AuthEffects, AuthReducer } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthService } from './services';
+import { AuthGuard } from './guards';
 
 const routes: Routes = [
   {
