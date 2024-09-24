@@ -1,10 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import * as userController from './controllers/user.controller';
 import bodyParser from 'body-parser';
-import authMiddleware from './middlewares/auth.middleware';
 import { mongodbUri, serverPort } from './config';
 import cors from 'cors';
+import { userController } from './controllers';
+import { authMiddleware } from './middlewares';
 
 const app = express();
 
