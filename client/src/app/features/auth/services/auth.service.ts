@@ -7,7 +7,7 @@ import {
   RegisterRequest,
 } from '../models';
 import { Store } from '@ngrx/store';
-import { CurrentUser } from '../../../../../../shared/models/user.interface';
+import { CurrentUser } from '@common';
 import { AuthActions, AuthSelectors } from '../store';
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { TokenData, UserDocument } from '../models';
-import { CurrentUser } from '../../../shared/models/user.interface';
+import { CurrentUser } from '@common';
 import { Error } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
