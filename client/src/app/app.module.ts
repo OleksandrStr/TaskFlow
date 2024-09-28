@@ -6,7 +6,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
+import { environment } from '@environment';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AuthInterceptor, AuthModule, HomeModule } from './features';
 
