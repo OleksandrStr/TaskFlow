@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { environment } from '@environment';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../services';
 import { Router } from '@angular/router';
 import { AuthActions } from '../actions';
-import { CurrentUser } from '@common';
+import { AuthConnector } from '../../connectors';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private router: Router,
-    private http: HttpClient
+    private authConnector: AuthConnector,
+    private router: Router
   ) {}
 
   registerUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.RegisterUser),
-      switchMap(({ payload }) => {
-        const url = environment.apiUrl + '/users';
-        return this.http.post<CurrentUser>(url, payload);
-      }),
+      switchMap(({ payload }) => this.authConnector.register(payload)),
       map((currentUser) => {
         this.authService.setToken(currentUser);
         this.router.navigateByUrl('/');
@@ -39,10 +35,7 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.Login),
-      switchMap(({ payload }) => {
-        const url = environment.apiUrl + '/users/login';
-        return this.http.post<CurrentUser>(url, payload);
-      }),
+      switchMap(({ payload }) => this.authConnector.login(payload)),
       map((currentUser) => {
         this.authService.setToken(currentUser);
         this.router.navigateByUrl('/');
@@ -58,10 +51,7 @@ export class AuthEffects {
   currentUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.GetCurrentUser),
-      switchMap(() => {
-        const url = environment.apiUrl + '/user';
-        return this.http.get<CurrentUser>(url);
-      }),
+      switchMap(() => this.authConnector.getCurrentUser()),
       map((currentUser) =>
         AuthActions.GetCurrentUserSuccess({ payload: currentUser })
       )

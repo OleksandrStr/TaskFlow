@@ -7,8 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { AUTH_FEATURE } from './models';
 import { AuthEffects, AuthReducer } from './store';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthService } from './services';
 import { AuthGuard } from './guards';
+import { AuthConnector } from './connectors';
 
 const routes: Routes = [
   {
@@ -29,7 +29,7 @@ const routes: Routes = [
     StoreModule.forFeature(AUTH_FEATURE, AuthReducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthConnector, AuthGuard],
   declarations: [RegistrationComponent, LoginComponent],
 })
 export class AuthModule {}
