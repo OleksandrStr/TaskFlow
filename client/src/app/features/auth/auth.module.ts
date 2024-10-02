@@ -1,4 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { LoginComponent, RegistrationComponent } from './components';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -9,27 +9,18 @@ import { AuthEffects, AuthReducer } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthGuard } from './guards';
 import { AuthConnector } from './connectors';
-
-const routes: Routes = [
-  {
-    path: 'register',
-    component: RegistrationComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-];
+import { authRoutes } from './auth.routes';
+import { AuthService } from './services';
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
+    RouterModule.forChild(authRoutes),
     ReactiveFormsModule,
     CommonModule,
     StoreModule.forFeature(AUTH_FEATURE, AuthReducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
-  providers: [AuthConnector, AuthGuard],
+  providers: [AuthService, AuthConnector, AuthGuard],
   declarations: [RegistrationComponent, LoginComponent],
 })
 export class AuthModule {}
