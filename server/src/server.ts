@@ -16,9 +16,9 @@ app.get('/', (_req, res) => {
   res.send('Server is UP');
 });
 
-app.post('/api/users', userController.register);
+app.post('/api/users/register', userController.register);
 app.post('/api/users/login', userController.login);
-app.get('/api/user', authMiddleware, userController.getCurrentUser);
+app.get('/api/users/current', authMiddleware, userController.getCurrentUser);
 
 mongoose.connect(mongodbUri).then(() => {
   console.info('Connected to MongoDB');

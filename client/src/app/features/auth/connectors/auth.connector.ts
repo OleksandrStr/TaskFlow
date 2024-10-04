@@ -10,7 +10,7 @@ export class AuthConnector {
   constructor(private http: HttpClient) {}
 
   register(registerRequest: RegisterRequest): Observable<CurrentUser> {
-    const url = environment.apiUrl + '/users';
+    const url = environment.apiUrl + '/users/register';
     return this.http.post<CurrentUser>(url, registerRequest);
   }
 
@@ -20,7 +20,7 @@ export class AuthConnector {
   }
 
   getCurrentUser(): Observable<CurrentUser> {
-    const url = environment.apiUrl + '/user';
+    const url = environment.apiUrl + '/users/current';
     return this.http.get<CurrentUser>(url);
   }
 }

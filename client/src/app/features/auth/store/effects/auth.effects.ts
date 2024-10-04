@@ -48,7 +48,7 @@ export class AuthEffects {
     )
   );
 
-  currentUser$ = createEffect(() =>
+  getCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.GetCurrentUser),
       switchMap(() => this.authConnector.getCurrentUser()),
