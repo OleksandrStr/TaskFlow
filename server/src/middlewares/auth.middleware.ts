@@ -1,8 +1,7 @@
 import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
-import { ExpressRequest } from '../models';
-import { TokenData } from '../models';
+import { ExpressRequest, TokenData } from '../models';
 import { UserModel } from '../db-models';
 
 export default async (
