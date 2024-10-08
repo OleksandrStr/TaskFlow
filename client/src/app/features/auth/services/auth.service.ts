@@ -8,7 +8,8 @@ import {
 } from '../models';
 import { Store } from '@ngrx/store';
 import { CurrentUser } from '@common';
-import { AuthActions, AuthSelectors } from '../store';
+import { AuthActions } from '../store/actions';
+import { AuthSelectors } from '../store/selectors';
 
 @Injectable()
 export class AuthService {
