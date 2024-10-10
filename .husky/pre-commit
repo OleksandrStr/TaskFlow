@@ -1,1 +1,1 @@
-yarn prettier && yarn lint && yarn stylelint
+yarn prettier && yarn lint && yarn check-circular-deps && yarn stylelint
