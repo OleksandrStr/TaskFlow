@@ -20,11 +20,11 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.RegisterUser),
       switchMap(({ payload }) => this.authConnector.register(payload)),
-      map((currentUser) => {
-        this.authService.setToken(currentUser);
+      map((user) => {
+        this.authService.setToken(user);
         this.router.navigateByUrl('/');
 
-        return AuthActions.RegisterUserSuccess({ payload: currentUser });
+        return AuthActions.RegisterUserSuccess({ payload: user });
       }),
       catchError((err: HttpErrorResponse) =>
         of(AuthActions.RegisterUserError({ err }))
@@ -36,11 +36,11 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.Login),
       switchMap(({ payload }) => this.authConnector.login(payload)),
-      map((currentUser) => {
-        this.authService.setToken(currentUser);
+      map((user) => {
+        this.authService.setToken(user);
         this.router.navigateByUrl('/');
 
-        return AuthActions.LoginSuccess({ payload: currentUser });
+        return AuthActions.LoginSuccess({ payload: user });
       }),
       catchError((err: HttpErrorResponse) =>
         of(AuthActions.LoginError({ err }))
@@ -52,9 +52,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.GetCurrentUser),
       switchMap(() => this.authConnector.getCurrentUser()),
-      map((currentUser) =>
-        AuthActions.GetCurrentUserSuccess({ payload: currentUser })
-      )
+      map((user) => AuthActions.GetCurrentUserSuccess({ payload: user }))
     )
   );
 }

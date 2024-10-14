@@ -7,7 +7,7 @@ import {
   RegisterRequest,
 } from '../models';
 import { Store } from '@ngrx/store';
-import { CurrentUser } from '@common';
+import { UserResponse } from '@common';
 import { AuthActions } from '../store/actions';
 import { AuthSelectors } from '../store/selectors';
 
@@ -42,7 +42,7 @@ export class AuthService {
     return localStorage.getItem(AuthLocalStorageKey.AUTH_TOKEN);
   }
 
-  setToken(currentUser: CurrentUser): void {
-    localStorage.setItem(AuthLocalStorageKey.AUTH_TOKEN, currentUser.token);
+  setToken(user: UserResponse): void {
+    localStorage.setItem(AuthLocalStorageKey.AUTH_TOKEN, user.token);
   }
 }

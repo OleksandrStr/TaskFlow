@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CurrentUser } from '@common';
+import { UserResponse } from '@common';
 import { LoginRequest, RegisterRequest } from '../../models';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -22,7 +22,7 @@ export const RegisterUser = createAction(
 );
 export const RegisterUserSuccess = createAction(
   REGISTER_USER_SUCCESS,
-  props<{ payload: CurrentUser }>()
+  props<{ payload: UserResponse }>()
 );
 export const RegisterUserError = createAction(
   REGISTER_USER_ERROR,
@@ -32,7 +32,7 @@ export const RegisterUserError = createAction(
 export const Login = createAction(LOGIN, props<{ payload: LoginRequest }>());
 export const LoginSuccess = createAction(
   LOGIN_SUCCESS,
-  props<{ payload: CurrentUser }>()
+  props<{ payload: UserResponse }>()
 );
 export const LoginError = createAction(
   LOGIN_ERROR,
@@ -44,5 +44,5 @@ export const CleanAuthError = createAction(CLEAN_AUTH_ERROR);
 export const GetCurrentUser = createAction(GET_CURRENT_USER);
 export const GetCurrentUserSuccess = createAction(
   GET_CURRENT_USER_SUCCESS,
-  props<{ payload: CurrentUser }>()
+  props<{ payload: UserResponse }>()
 );

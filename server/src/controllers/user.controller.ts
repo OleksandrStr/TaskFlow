@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import { TokenData, UserDocument, ExpressRequest } from '../models';
-import { CurrentUser } from '@common';
+import { UserResponse } from '@common';
 import { Error } from 'mongoose';
 import jwt from 'jsonwebtoken';
 import { jwtSecretKey } from '../config';
 import { UserModel } from '../db-models';
 
-const normalizeUser = (user: UserDocument): CurrentUser => {
+const normalizeUser = (user: UserDocument): UserResponse => {
   const tokenData: TokenData = { id: user.id, email: user.email };
   const token = jwt.sign(tokenData, jwtSecretKey);
   return {

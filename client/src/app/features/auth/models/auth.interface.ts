@@ -1,13 +1,13 @@
 export const AUTH_FEATURE = 'auth';
 
-export interface UserState {
+export interface User {
   id: string;
   username: string;
   email: string;
 }
 
 export interface AuthState {
-  user: UserState;
+  user: User;
   error: string;
 }
 
