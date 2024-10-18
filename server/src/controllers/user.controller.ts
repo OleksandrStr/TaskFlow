@@ -1,21 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { TokenData, UserDocument, ExpressRequest } from '../models';
-import { UserResponse } from '@common';
+import { ExpressRequest } from '../models';
 import { Error } from 'mongoose';
-import jwt from 'jsonwebtoken';
-import { jwtSecretKey } from '../config';
 import { UserModel } from '../db-models';
-
-const normalizeUser = (user: UserDocument): UserResponse => {
-  const tokenData: TokenData = { id: user.id, email: user.email };
-  const token = jwt.sign(tokenData, jwtSecretKey);
-  return {
-    email: user.email,
-    username: user.username,
-    id: user.id,
-    token: `Bearer ${token}`,
-  };
-};
+import { normalizeUser } from '../utils';
 
 export const register = async (
   req: Request,
