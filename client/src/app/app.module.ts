@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@environment';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { AuthModule, HomeModule } from './features';
+import { AuthModule, BoardsModule, HomeModule } from './features';
 
 const storeDevtools: ModuleWithProviders<StoreDevtoolsModule> | [] =
   environment.production ? [] : StoreDevtoolsModule.instrument();
@@ -21,6 +21,7 @@ const storeDevtools: ModuleWithProviders<StoreDevtoolsModule> | [] =
     HttpClientModule,
     HomeModule,
     AuthModule,
+    BoardsModule,
     StoreModule.forRoot({ router: routerReducer }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
