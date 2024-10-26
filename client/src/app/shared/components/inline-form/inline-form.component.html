@@ -1,0 +1,36 @@
+<div
+  class="inline-form-container"
+  [class.inline-form-container--edit]="isEditing"
+  (click)="edit()"
+>
+  <div *ngIf="!isEditing" class="inline-form-container__text">
+    {{ defaultText }}
+  </div>
+  <form
+    class="inline-form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    *ngIf="isEditing"
+  >
+    <input
+      *ngIf="inputType === 'input'"
+      class="inline-form__input"
+      type="text"
+      formControlName="title"
+      [placeholder]="inputPlaceholder"
+    />
+    <textarea
+      *ngIf="inputType === 'textarea'"
+      class="inline-form__textarea"
+      formControlName="title"
+    ></textarea>
+    <button
+      *ngIf="hasButton"
+      class="inline-form__button"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      {{ buttonText }}
+    </button>
+  </form>
+</div>
