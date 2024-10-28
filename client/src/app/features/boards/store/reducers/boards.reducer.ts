@@ -8,7 +8,10 @@ const initialBoardsState: BoardsState = {
 
 export const BoardsReducer = createReducer(
   initialBoardsState,
-  on(BoardsActions.GetBoardsSuccess, (_state, { payload }) => ({
+  on(BoardsActions.LoadBoardsSuccess, (_state, { payload }) => ({
     boards: payload,
+  })),
+  on(BoardsActions.CreateBoardSuccess, (state, { payload }) => ({
+    boards: [...state.boards, payload],
   }))
 );

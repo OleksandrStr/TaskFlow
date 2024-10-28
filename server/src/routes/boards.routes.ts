@@ -5,3 +5,4 @@ import { boardController } from '../controllers';
 export const boardRoutes = Router();
 
 boardRoutes.get('', authMiddleware, boardController.getBoards);
+boardRoutes.post('', authMiddleware, boardController.createBoard);

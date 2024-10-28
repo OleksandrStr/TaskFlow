@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Board, BoardsState } from '../models';
+import { Store } from '@ngrx/store';
+import { BoardsActions, BoardsSelectors } from '../store';
 import { Observable } from 'rxjs';
-import { Board } from '../models';
-import { environment } from '@environment';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class BoardsService {
-  constructor(private http: HttpClient) {}
+  constructor(private store: Store<BoardsState>) {}
+
+  loadBoards(): void {
+    this.store.dispatch(BoardsActions.LoadBoards());
+  }
 
   getBoards(): Observable<Board[]> {
-    const url = environment.apiUrl + '/boards';
-    return this.http.get<Board[]>(url);
+    return this.store.select(BoardsSelectors.getBoards);
+  }
+
+  createBoard(title: string): void {
+    this.store.dispatch(BoardsActions.CreateBoard({ payload: title }));
   }
 }

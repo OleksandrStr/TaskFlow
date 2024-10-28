@@ -1,1 +1,36 @@
-Boards
+<div class="boards-page">
+  <div class="boards-page__sidebar">
+    <a
+      routerLink="/boards"
+      class="boards-page__sidebar-option"
+      routerLinkActive="boards-page__sidebar-option--selected"
+      >Boards</a
+    >
+    <a
+      routerLink="/"
+      class="boards-page__sidebar-option"
+      routerLinkActive="boards-page__sidebar-option--selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
+  </div>
+  <div class="boards-page__my-boards">
+    <div class="my-boards">
+      <p class="my-boards__title">My boards</p>
+      <div class="my-boards__boards">
+        <inline-form
+          class="my-boards__create-board"
+          defaultText="Create new board"
+          (submitEvent)="createBoard($event)"
+        ></inline-form>
+        <a
+          *ngFor="let board of boards$ | async"
+          class="my-boards__board"
+          [routerLink]="['/boards', board.id]"
+        >
+          <div class="my-boards__board-title">{{ board.title }}</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

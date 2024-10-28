@@ -13,9 +13,17 @@ export class BoardsEffects {
 
   getBoards$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(BoardsActions.GetBoards),
+      ofType(BoardsActions.LoadBoards),
       switchMap(() => this.boardsConnector.getBoards()),
-      map((boards) => BoardsActions.GetBoardsSuccess({ payload: boards }))
+      map((boards) => BoardsActions.LoadBoardsSuccess({ payload: boards }))
+    )
+  );
+
+  createBoard$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BoardsActions.CreateBoard),
+      switchMap(({ payload }) => this.boardsConnector.createBoard(payload)),
+      map((board) => BoardsActions.CreateBoardSuccess({ payload: board }))
     )
   );
 }

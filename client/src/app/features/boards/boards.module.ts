@@ -8,9 +8,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { BOARDS_FEATURE } from './models';
 import { BoardsEffects, BoardsReducer } from './store';
 import { BoardsConnector } from './connectors';
+import { SharedModule } from '../../shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
+    CommonModule,
+    SharedModule,
     RouterModule.forChild(boardsRoutes),
     StoreModule.forFeature(BOARDS_FEATURE, BoardsReducer),
     EffectsModule.forFeature([BoardsEffects]),
