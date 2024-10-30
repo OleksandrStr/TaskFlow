@@ -1,0 +1,16 @@
+<div class="nav-bar">
+  <div class="nav-bar__left-side">
+    <a routerLink="/" class="nav-bar__icon">
+      <img src="/assets/home.svg" />
+    </a>
+    <a routerLink="/boards" class="nav-bar__icon nav-bar__icon--boards">
+      <img src="/assets/boards.svg" />
+    </a>
+  </div>
+  <img src="/assets/logo-white.svg" class="nav-bar__logo" />
+  <div class="nav-bar__right-side">
+    <div class="nav-bar__icon nav-bar__icon--logout" (click)="logout()">
+      Logout
+    </div>
+  </div>
+</div>

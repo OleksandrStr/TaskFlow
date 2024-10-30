@@ -23,6 +23,7 @@
     "lib": ["es2020", "dom"],
     "paths": {
       "@environment": ["./src/environments/environment"],
+      "@shared": ["./src/app/shared"],
       "@common": ["./../common"]
     }
   },

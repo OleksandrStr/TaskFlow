@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../services';
 import { Router } from '@angular/router';
 import { AuthActions } from '../actions';
 import { AuthConnector } from '../../connectors';
+import { AuthLocalStorageKey } from '../../models';
 
 @Injectable()
 export class AuthEffects {
@@ -46,6 +47,18 @@ export class AuthEffects {
         of(AuthActions.LoginError({ err }))
       )
     )
+  );
+
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.Logout),
+        tap(() => {
+          localStorage.removeItem(AuthLocalStorageKey.AUTH_TOKEN);
+          this.router.navigateByUrl('/');
+        })
+      ),
+    { dispatch: false }
   );
 
   getCurrentUser$ = createEffect(() =>

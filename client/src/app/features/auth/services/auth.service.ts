@@ -26,6 +26,10 @@ export class AuthService {
     this.store.dispatch(AuthActions.Login({ payload: loginRequest }));
   }
 
+  logout(): void {
+    this.store.dispatch(AuthActions.Logout());
+  }
+
   getCurrentUser(): void {
     this.store.dispatch(AuthActions.GetCurrentUser());
   }

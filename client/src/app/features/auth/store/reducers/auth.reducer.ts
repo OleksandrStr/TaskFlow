@@ -22,6 +22,7 @@ export const AuthReducer = createReducer(
       error: '',
     })
   ),
+  on(AuthActions.Logout, (_state, _action) => initialAuthState),
   on(AuthActions.CleanAuthError, (state, _action) => ({
     ...state,
     error: '',

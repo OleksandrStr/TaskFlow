@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
-import { InlineFormComponent } from './components';
+import { InlineFormComponent, NavBarComponent } from './components';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+const components = [InlineFormComponent, NavBarComponent];
 
 @NgModule({
-  declarations: [InlineFormComponent],
-  imports: [CommonModule, ReactiveFormsModule],
-  exports: [InlineFormComponent],
+  declarations: [components],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  exports: [components],
 })
 export class SharedModule {}
