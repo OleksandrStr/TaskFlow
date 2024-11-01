@@ -17,4 +17,9 @@ export class BoardsConnector {
     const url = environment.apiUrl + '/boards';
     return this.http.post<Board>(url, { title });
   }
+
+  loadBoard(boardId: string): Observable<Board> {
+    const url = `${environment.apiUrl}/boards/${boardId}`;
+    return this.http.get<Board>(url);
+  }
 }

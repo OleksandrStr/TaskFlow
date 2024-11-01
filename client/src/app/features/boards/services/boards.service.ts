@@ -19,4 +19,12 @@ export class BoardsService {
   createBoard(title: string): void {
     this.store.dispatch(BoardsActions.CreateBoard({ payload: title }));
   }
+
+  loadBoard(boardId: string): void {
+    this.store.dispatch(BoardsActions.LoadBoard({ payload: boardId }));
+  }
+
+  getCurrentBoard(): Observable<Board> {
+    return this.store.select(BoardsSelectors.getCurrentBoard);
+  }
 }

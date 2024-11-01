@@ -6,3 +6,4 @@ export const boardRoutes = Router();
 
 boardRoutes.get('', authMiddleware, boardController.getBoards);
 boardRoutes.post('', authMiddleware, boardController.createBoard);
+boardRoutes.get('/:boardId', authMiddleware, boardController.getBoard);

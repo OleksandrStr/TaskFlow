@@ -19,6 +19,14 @@ export class BoardsEffects {
     )
   );
 
+  loadBoard$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BoardsActions.LoadBoard),
+      switchMap(({ payload }) => this.boardsConnector.loadBoard(payload)),
+      map((board) => BoardsActions.LoadBoardSuccess({ payload: board }))
+    )
+  );
+
   createBoard$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BoardsActions.CreateBoard),

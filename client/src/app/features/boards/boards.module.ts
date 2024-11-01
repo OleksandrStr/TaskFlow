@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BoardsComponent } from './components';
+import { BoardComponent, BoardsComponent } from './components';
 import { RouterModule } from '@angular/router';
 import { boardsRoutes } from './boards.routes';
 import { BoardsService } from './services';
@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { BOARDS_FEATURE } from './models';
 import { BoardsEffects, BoardsReducer } from './store';
 import { BoardsConnector } from './connectors';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@shared';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
     StoreModule.forFeature(BOARDS_FEATURE, BoardsReducer),
     EffectsModule.forFeature([BoardsEffects]),
   ],
-  declarations: [BoardsComponent],
+  declarations: [BoardsComponent, BoardComponent],
   providers: [BoardsService, BoardsConnector],
 })
 export class BoardsModule {}

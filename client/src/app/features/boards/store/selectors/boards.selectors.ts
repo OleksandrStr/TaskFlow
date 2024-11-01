@@ -6,3 +6,7 @@ export const getBoards = createSelector(
   getBoardsState,
   (state) => state.boards
 );
+export const getCurrentBoard = createSelector(
+  getBoardsState,
+  (state) => state.currentBoard
+);

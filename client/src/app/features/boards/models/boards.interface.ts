@@ -9,5 +9,6 @@ export interface Board {
 }
 
 export interface BoardsState {
+  currentBoard: Board;
   boards: Board[];
 }
