@@ -1,3 +1,5 @@
+import { Column } from './column.interface';
+
 export const BOARDS_FEATURE = 'boards';
 
 export interface Board {
@@ -9,6 +11,7 @@ export interface Board {
 }
 
 export interface BoardsState {
-  currentBoard: Board;
   boards: Board[];
+  currentBoard: Board;
+  currentColumns: Column[];
 }

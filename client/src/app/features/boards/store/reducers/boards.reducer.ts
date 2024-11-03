@@ -3,8 +3,9 @@ import { BoardsActions } from '../actions';
 import { BoardsState } from '../../models';
 
 const initialBoardsState: BoardsState = {
-  currentBoard: null,
   boards: [],
+  currentBoard: null,
+  currentColumns: null,
 };
 
 export const BoardsReducer = createReducer(
@@ -20,5 +21,13 @@ export const BoardsReducer = createReducer(
   on(BoardsActions.LoadBoardSuccess, (state, { payload }) => ({
     ...state,
     currentBoard: payload,
+  })),
+  on(BoardsActions.LoadColumnsSuccess, (state, { payload }) => ({
+    ...state,
+    currentColumns: payload,
+  })),
+  on(BoardsActions.CreateColumnSuccess, (state, { payload }) => ({
+    ...state,
+    currentColumns: [...state.currentColumns, payload],
   }))
 );

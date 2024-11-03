@@ -11,7 +11,7 @@ export class BoardsEffects {
     private boardsConnector: BoardsConnector
   ) {}
 
-  getBoards$ = createEffect(() =>
+  loadBoards$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BoardsActions.LoadBoards),
       switchMap(() => this.boardsConnector.getBoards()),
@@ -32,6 +32,22 @@ export class BoardsEffects {
       ofType(BoardsActions.CreateBoard),
       switchMap(({ payload }) => this.boardsConnector.createBoard(payload)),
       map((board) => BoardsActions.CreateBoardSuccess({ payload: board }))
+    )
+  );
+
+  loadColumns$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BoardsActions.LoadColumns),
+      switchMap(({ payload }) => this.boardsConnector.getColumns(payload)),
+      map((columns) => BoardsActions.LoadColumnsSuccess({ payload: columns }))
+    )
+  );
+
+  createColumn$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BoardsActions.CreateColumn),
+      switchMap(({ payload }) => this.boardsConnector.createColumn(payload)),
+      map((column) => BoardsActions.CreateColumnSuccess({ payload: column }))
     )
   );
 }

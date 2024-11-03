@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { userRoutes, boardRoutes } from './routes';
+import { userRoutes, boardRoutes, columnsRoutes } from './routes';
 
 export const app = express();
 
@@ -11,3 +11,4 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/users', userRoutes);
 app.use('/api/boards', boardRoutes);
+app.use('/api/boards', columnsRoutes);
