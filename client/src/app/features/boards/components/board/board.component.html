@@ -6,8 +6,9 @@
       class="board__edit"
       [defaultText]="board.title"
       [title]="board.title"
+      (submitEvent)="updateBoardTitle($event)"
     ></inline-form>
-    <div class="board__delete">Delete board</div>
+    <div class="board__delete" (click)="deleteBoard()">Delete board</div>
   </div>
   <div class="board__columns">
     <div class="board__column" *ngFor="let column of columns$ | async">

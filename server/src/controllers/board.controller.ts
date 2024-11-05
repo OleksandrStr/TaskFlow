@@ -59,3 +59,43 @@ export const getBoard = async (
     next(error);
   }
 };
+
+export const updateBoard = async (
+  req: ExpressRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    if (!req.user) {
+      res.sendStatus(401);
+      return;
+    }
+
+    const updatedBoard = await BoardModel.findByIdAndUpdate(
+      req.body.boardId,
+      req.body.fields,
+      { new: true }
+    );
+    res.send(updatedBoard);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteBoard = async (
+  req: ExpressRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    if (!req.user) {
+      res.sendStatus(401);
+      return;
+    }
+
+    await BoardModel.deleteOne({ _id: req.params.boardId });
+    res.status(200).send();
+  } catch (error) {
+    next(error);
+  }
+};

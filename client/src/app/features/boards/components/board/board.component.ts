@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BoardsService } from '../../services';
-import { ColumnInput } from '../../models';
 
 @Component({
   selector: 'board',
@@ -30,11 +29,24 @@ export class BoardComponent implements OnInit {
     this.boardsService.loadColumns(this.boardId);
   }
 
+  updateBoardTitle(boardTitle: string): void {
+    this.boardsService.updateBoard({
+      boardId: this.boardId,
+      fields: { title: boardTitle },
+    });
+  }
+
+  deleteBoard(): void {
+    if (confirm('Are you sure you want to delete the board?')) {
+      this.boardsService.deleteBoard(this.boardId);
+    }
+  }
+
   createColumn(title: string): void {
-    const columnInput: ColumnInput = {
+    const createColumnPayload = {
       title,
       boardId: this.boardId,
     };
-    this.boardsService.createColumn(columnInput);
+    this.boardsService.createColumn(createColumnPayload);
   }
 }

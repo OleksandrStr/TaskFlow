@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Board, BoardsState, Column, ColumnInput } from '../models';
+import {
+  Board,
+  BoardsState,
+  Column,
+  CreateColumnPayload,
+  UpdateBoardPayload,
+} from '../models';
 import { Store } from '@ngrx/store';
 import { BoardsActions, BoardsSelectors } from '../store';
 import { Observable } from 'rxjs';
@@ -36,7 +42,19 @@ export class BoardsService {
     return this.store.select(BoardsSelectors.getColumns);
   }
 
-  createColumn(columnInput: ColumnInput): void {
-    this.store.dispatch(BoardsActions.CreateColumn({ payload: columnInput }));
+  createColumn(createColumnPayload: CreateColumnPayload): void {
+    this.store.dispatch(
+      BoardsActions.CreateColumn({ payload: createColumnPayload })
+    );
+  }
+
+  updateBoard(updateBoardPayload: UpdateBoardPayload): void {
+    this.store.dispatch(
+      BoardsActions.UpdateBoard({ payload: updateBoardPayload })
+    );
+  }
+
+  deleteBoard(boardId: string): void {
+    this.store.dispatch(BoardsActions.DeleteBoard({ payload: boardId }));
   }
 }

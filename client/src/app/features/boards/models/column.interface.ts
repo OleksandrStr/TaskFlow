@@ -1,4 +1,4 @@
-export interface ColumnInput {
+export interface CreateColumnPayload {
   title: string;
   boardId: string;
 }

@@ -22,6 +22,14 @@ export const BoardsReducer = createReducer(
     ...state,
     currentBoard: payload,
   })),
+  on(BoardsActions.UpdateBoardSuccess, (state, { payload }) => ({
+    ...state,
+    currentBoard: payload,
+  })),
+  on(BoardsActions.DeleteBoardSuccess, (state, { payload }) => ({
+    ...state,
+    boards: state.boards.filter((board) => board.id !== payload),
+  })),
   on(BoardsActions.LoadColumnsSuccess, (state, { payload }) => ({
     ...state,
     currentColumns: payload,
