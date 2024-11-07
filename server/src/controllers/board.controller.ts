@@ -72,7 +72,7 @@ export const updateBoard = async (
     }
 
     const updatedBoard = await BoardModel.findByIdAndUpdate(
-      req.body.boardId,
+      req.params.boardId,
       req.body.fields,
       { new: true }
     );

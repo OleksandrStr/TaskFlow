@@ -16,7 +16,7 @@ export interface BoardsState {
   currentColumns: Column[];
 }
 
-export interface UpdateBoardPayload {
+export interface UpdateBoardInfo {
   boardId: string;
   fields: { title: string };
 }

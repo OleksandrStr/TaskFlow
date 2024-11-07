@@ -37,5 +37,17 @@ export const BoardsReducer = createReducer(
   on(BoardsActions.CreateColumnSuccess, (state, { payload }) => ({
     ...state,
     currentColumns: [...state.currentColumns, payload],
+  })),
+  on(BoardsActions.UpdateColumnSuccess, (state, { payload }) => ({
+    ...state,
+    currentColumns: state.currentColumns.map((column) =>
+      column.id === payload.id ? payload : column
+    ),
+  })),
+  on(BoardsActions.DeleteColumnSuccess, (state, { payload }) => ({
+    ...state,
+    currentColumns: state.currentColumns.filter(
+      (column) => column.id !== payload
+    ),
   }))
 );

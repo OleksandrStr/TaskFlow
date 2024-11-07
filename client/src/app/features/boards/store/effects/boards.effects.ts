@@ -24,7 +24,7 @@ export class BoardsEffects {
   loadBoard$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BoardsActions.LoadBoard),
-      switchMap(({ payload }) => this.boardsConnector.loadBoard(payload)),
+      switchMap(({ payload }) => this.boardsConnector.getBoard(payload)),
       map((board) => BoardsActions.LoadBoardSuccess({ payload: board }))
     )
   );
@@ -70,6 +70,25 @@ export class BoardsEffects {
       ofType(BoardsActions.CreateColumn),
       switchMap(({ payload }) => this.boardsConnector.createColumn(payload)),
       map((column) => BoardsActions.CreateColumnSuccess({ payload: column }))
+    )
+  );
+
+  updateColumn$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BoardsActions.UpdateColumn),
+      switchMap(({ payload }) => this.boardsConnector.updateColumn(payload)),
+      map((column) => BoardsActions.UpdateColumnSuccess({ payload: column }))
+    )
+  );
+
+  deleteColumn$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BoardsActions.DeleteColumn),
+      switchMap(({ payload }) =>
+        this.boardsConnector
+          .deleteColumn(payload)
+          .pipe(map(() => BoardsActions.DeleteColumnSuccess({ payload })))
+      )
     )
   );
 }

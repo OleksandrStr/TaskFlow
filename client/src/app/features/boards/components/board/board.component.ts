@@ -29,10 +29,10 @@ export class BoardComponent implements OnInit {
     this.boardsService.loadColumns(this.boardId);
   }
 
-  updateBoardTitle(boardTitle: string): void {
+  updateBoardTitle(title: string): void {
     this.boardsService.updateBoard({
       boardId: this.boardId,
-      fields: { title: boardTitle },
+      fields: { title },
     });
   }
 
@@ -43,10 +43,22 @@ export class BoardComponent implements OnInit {
   }
 
   createColumn(title: string): void {
-    const createColumnPayload = {
+    const createColumnInfo = {
       title,
       boardId: this.boardId,
     };
-    this.boardsService.createColumn(createColumnPayload);
+    this.boardsService.createColumn(createColumnInfo);
+  }
+
+  updateColumnTitle(title: string, columnId: string): void {
+    const updateColumnInfo = {
+      columnId,
+      fields: { title },
+    };
+    this.boardsService.updateColumn(updateColumnInfo);
+  }
+
+  deleteColumn(columnId: string): void {
+    this.boardsService.deleteColumn(columnId);
   }
 }

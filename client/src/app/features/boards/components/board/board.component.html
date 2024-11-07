@@ -17,8 +17,13 @@
           class="board__column-edit"
           [defaultText]="column.title"
           [title]="column.title"
+          (submitEvent)="updateColumnTitle($event, column.id)"
         ></inline-form>
-        <img class="board__column-delete" src="/assets/close_icon.svg" />
+        <img
+          class="board__column-delete"
+          src="/assets/close_icon.svg"
+          (click)="deleteColumn(column.id)"
+        />
       </div>
     </div>
     <inline-form

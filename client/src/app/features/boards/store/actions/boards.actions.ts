@@ -2,8 +2,9 @@ import { createAction, props } from '@ngrx/store';
 import {
   Board,
   Column,
-  CreateColumnPayload,
-  UpdateBoardPayload,
+  CreateColumnInfo,
+  UpdateBoardInfo,
+  UpdateColumnInfo,
 } from '../../models';
 
 const LOAD_BOARDS = '[Boards] Load Boards';
@@ -21,11 +22,17 @@ const UPDATE_BOARD_SUCCESS = '[Boards] Update Board Success';
 const DELETE_BOARD = '[Boards] Delete Board';
 const DELETE_BOARD_SUCCESS = '[Boards] Delete Board Success';
 
+const CREATE_COLUMN = '[Boards] Create Column';
+const CREATE_COLUMN_SUCCESS = '[Boards] Create Column Success';
+
 const LOAD_COLUMNS = '[Boards] Load Columns';
 const LOAD_COLUMNS_SUCCESS = '[Boards] Load Columns Success';
 
-const CREATE_COLUMN = '[Boards] Create Column';
-const CREATE_COLUMN_SUCCESS = '[Boards] Create Column Success';
+const UPDATE_COLUMN = '[Boards] Update Column';
+const UPDATE_COLUMN_SUCCESS = '[Boards] Update Column Success';
+
+const DELETE_COLUMN = '[Boards] Delete Column';
+const DELETE_COLUMN_SUCCESS = '[Boards] Delete Column Success';
 
 export const LoadBoards = createAction(LOAD_BOARDS);
 export const LoadBoardsSuccess = createAction(
@@ -50,7 +57,7 @@ export const LoadBoardSuccess = createAction(
 
 export const UpdateBoard = createAction(
   UPDATE_BOARD,
-  props<{ payload: UpdateBoardPayload }>()
+  props<{ payload: UpdateBoardInfo }>()
 );
 export const UpdateBoardSuccess = createAction(
   UPDATE_BOARD_SUCCESS,
@@ -66,6 +73,15 @@ export const DeleteBoardSuccess = createAction(
   props<{ payload: string }>()
 );
 
+export const CreateColumn = createAction(
+  CREATE_COLUMN,
+  props<{ payload: CreateColumnInfo }>()
+);
+export const CreateColumnSuccess = createAction(
+  CREATE_COLUMN_SUCCESS,
+  props<{ payload: Column }>()
+);
+
 export const LoadColumns = createAction(
   LOAD_COLUMNS,
   props<{ payload: string }>()
@@ -75,11 +91,20 @@ export const LoadColumnsSuccess = createAction(
   props<{ payload: Column[] }>()
 );
 
-export const CreateColumn = createAction(
-  CREATE_COLUMN,
-  props<{ payload: CreateColumnPayload }>()
+export const UpdateColumn = createAction(
+  UPDATE_COLUMN,
+  props<{ payload: UpdateColumnInfo }>()
 );
-export const CreateColumnSuccess = createAction(
-  CREATE_COLUMN_SUCCESS,
+export const UpdateColumnSuccess = createAction(
+  UPDATE_COLUMN_SUCCESS,
   props<{ payload: Column }>()
+);
+
+export const DeleteColumn = createAction(
+  DELETE_COLUMN,
+  props<{ payload: string }>()
+);
+export const DeleteColumnSuccess = createAction(
+  DELETE_COLUMN_SUCCESS,
+  props<{ payload: string }>()
 );

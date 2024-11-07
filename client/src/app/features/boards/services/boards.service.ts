@@ -3,8 +3,9 @@ import {
   Board,
   BoardsState,
   Column,
-  CreateColumnPayload,
-  UpdateBoardPayload,
+  CreateColumnInfo,
+  UpdateBoardInfo,
+  UpdateColumnInfo,
 } from '../models';
 import { Store } from '@ngrx/store';
 import { BoardsActions, BoardsSelectors } from '../store';
@@ -34,6 +35,16 @@ export class BoardsService {
     return this.store.select(BoardsSelectors.getCurrentBoard);
   }
 
+  updateBoard(updateBoardInfo: UpdateBoardInfo): void {
+    this.store.dispatch(
+      BoardsActions.UpdateBoard({ payload: updateBoardInfo })
+    );
+  }
+
+  deleteBoard(boardId: string): void {
+    this.store.dispatch(BoardsActions.DeleteBoard({ payload: boardId }));
+  }
+
   loadColumns(boardId: string): void {
     this.store.dispatch(BoardsActions.LoadColumns({ payload: boardId }));
   }
@@ -42,19 +53,21 @@ export class BoardsService {
     return this.store.select(BoardsSelectors.getColumns);
   }
 
-  createColumn(createColumnPayload: CreateColumnPayload): void {
+  createColumn(createColumnInfo: CreateColumnInfo): void {
     this.store.dispatch(
-      BoardsActions.CreateColumn({ payload: createColumnPayload })
+      BoardsActions.CreateColumn({ payload: createColumnInfo })
     );
   }
 
-  updateBoard(updateBoardPayload: UpdateBoardPayload): void {
+  updateColumn(updateColumnInfo: UpdateColumnInfo): void {
     this.store.dispatch(
-      BoardsActions.UpdateBoard({ payload: updateBoardPayload })
+      BoardsActions.UpdateColumn({
+        payload: updateColumnInfo,
+      })
     );
   }
 
-  deleteBoard(boardId: string): void {
-    this.store.dispatch(BoardsActions.DeleteBoard({ payload: boardId }));
+  deleteColumn(columnId: string): void {
+    this.store.dispatch(BoardsActions.DeleteColumn({ payload: columnId }));
   }
 }
