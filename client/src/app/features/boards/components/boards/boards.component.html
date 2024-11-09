@@ -16,21 +16,21 @@
       >Home</a
     >
   </div>
-  <div class="boards-page__my-boards">
-    <div class="my-boards">
-      <p class="my-boards__title">My boards</p>
-      <div class="my-boards__boards">
+  <div class="boards-page__boards">
+    <div class="boards">
+      <p class="boards__title">My boards</p>
+      <div class="boards__container">
         <inline-form
-          class="my-boards__create-board"
+          class="boards__create-board"
           defaultText="Create new board"
           (submitEvent)="createBoard($event)"
         ></inline-form>
         <a
           *ngFor="let board of boards$ | async"
-          class="my-boards__board"
+          class="boards__board"
           [routerLink]="['/boards', board.id]"
         >
-          <div class="my-boards__board-title">{{ board.title }}</div>
+          <div class="boards__board-title">{{ board.title }}</div>
         </a>
       </div>
     </div>
