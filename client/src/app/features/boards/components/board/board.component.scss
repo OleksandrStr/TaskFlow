@@ -9,6 +9,31 @@
     align-items: center;
   }
 
+  &__edit {
+    .inline-form-container__text {
+      font-size: 18px;
+      color: #fff;
+      padding: 5px 12px;
+      margin-right: 20px;
+    }
+
+    .inline-form {
+      padding: 5px 12px;
+
+      &__input {
+        font-weight: 300;
+        font-size: 14px;
+        width: 100%;
+        background-color: #fafbfc;
+        border: 2px solid #dfe1e6;
+        box-sizing: border-box;
+        border-radius: 3px;
+        height: 30px;
+        padding: 7px;
+      }
+    }
+  }
+
   &__delete {
     color: #fff;
     padding: 5px 8px;
@@ -57,6 +82,79 @@
       &:hover {
         background-color: #091e4214;
         border-radius: 15%;
+      }
+    }
+  }
+
+  &__task {
+    box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
+    cursor: pointer;
+    max-width: 300px;
+    min-height: 20px;
+    color: #3d4852;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 8px;
+
+    &:hover {
+      border-bottom-color: #091e423f;
+      background-color: #f4f5f7;
+    }
+
+    &-create {
+      border-radius: 3px;
+      box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+      cursor: pointer;
+      margin: 0 4px;
+      width: 272px;
+      min-height: 32px;
+
+      .inline-form {
+        &-container {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+
+          &--edit {
+            background: #ebecf0;
+          }
+        }
+
+        &__input {
+          font-weight: 500;
+          font-size: 16px;
+          width: 100%;
+          background-color: #fafbfc;
+          border: 2px solid #dfe1e6;
+          box-sizing: border-box;
+          border-radius: 3px;
+          height: 30px;
+          padding: 7px;
+        }
+
+        &__button {
+          background: #5aac44;
+          border-radius: 0.3em;
+          color: #fff;
+          display: inline-block;
+          font-weight: bold;
+          margin-bottom: 0.8em;
+          font-size: 16px;
+          padding: 0.6em 1.3em !important;
+          position: relative;
+          text-decoration: none;
+          border: 0;
+          margin-top: 10px;
+          cursor: pointer;
+          font-family: Arial, Helvetica, sans-serif;
+
+          &:hover {
+            background-color: #61bd4f;
+          }
+        }
       }
     }
   }
@@ -120,27 +218,4 @@
       }
     }
   }
-}
-
-.board__edit .inline-form-container__text {
-  font-size: 18px;
-  color: #fff;
-  padding: 5px 12px;
-  margin-right: 20px;
-}
-
-.board__edit .inline-form__input {
-  font-weight: 300;
-  font-size: 14px;
-  width: 100%;
-  background-color: #fafbfc;
-  border: 2px solid #dfe1e6;
-  box-sizing: border-box;
-  border-radius: 3px;
-  height: 30px;
-  padding: 7px;
-}
-
-.board__edit .inline-form {
-  padding: 5px 12px;
 }

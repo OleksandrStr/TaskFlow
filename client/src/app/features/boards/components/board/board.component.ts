@@ -4,8 +4,9 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BoardsService } from '../../services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BoardsService, TasksService } from '../../services';
+import { Task, CreateTaskInfo } from '../../models';
 
 @Component({
   selector: 'board',
@@ -18,15 +19,19 @@ export class BoardComponent implements OnInit {
   boardId = this.route.snapshot.paramMap.get('boardId');
   board$ = this.boardsService.getCurrentBoard();
   columns$ = this.boardsService.getCurrentColumns();
+  tasks$ = this.tasksService.getCurrentTasks();
 
   constructor(
     private boardsService: BoardsService,
+    private tasksService: TasksService,
+    private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.boardsService.loadBoard(this.boardId);
     this.boardsService.loadColumns(this.boardId);
+    this.tasksService.loadTasks(this.boardId);
   }
 
   updateBoardTitle(title: string): void {
@@ -60,5 +65,22 @@ export class BoardComponent implements OnInit {
 
   deleteColumn(columnId: string): void {
     this.boardsService.deleteColumn(columnId);
+  }
+
+  getTasksByColumn(tasks: Task[], columnId: string): Task[] {
+    return tasks?.filter((task) => task.columnId === columnId);
+  }
+
+  openTask(taskId: string): void {
+    this.router.navigate(['boards', this.boardId, 'tasks', taskId]);
+  }
+
+  createTask(title: string, columnId: string): void {
+    const createTaskInfo: CreateTaskInfo = {
+      title,
+      boardId: this.boardId,
+      columnId,
+    };
+    this.tasksService.createTask(createTaskInfo);
   }
 }

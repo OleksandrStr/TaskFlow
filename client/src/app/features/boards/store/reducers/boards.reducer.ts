@@ -1,11 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { BoardsActions } from '../actions';
+import { BoardsActions, TasksActions } from '../actions';
 import { BoardsState } from '../../models';
 
 const initialBoardsState: BoardsState = {
-  boards: [],
+  boards: null,
   currentBoard: null,
   currentColumns: null,
+  currentTasks: null,
 };
 
 export const BoardsReducer = createReducer(
@@ -49,5 +50,23 @@ export const BoardsReducer = createReducer(
     currentColumns: state.currentColumns.filter(
       (column) => column.id !== payload
     ),
+  })),
+  on(TasksActions.LoadTasksSuccess, (state, { payload }) => ({
+    ...state,
+    currentTasks: payload,
+  })),
+  on(TasksActions.CreateTaskSuccess, (state, { payload }) => ({
+    ...state,
+    currentTasks: [...state.currentTasks, payload],
+  })),
+  on(TasksActions.UpdateTaskSuccess, (state, { payload }) => ({
+    ...state,
+    currentTasks: state.currentTasks.map((task) =>
+      task.id === payload.id ? payload : task
+    ),
+  })),
+  on(TasksActions.DeleteTaskSuccess, (state, { payload }) => ({
+    ...state,
+    currentTasks: state.currentTasks.filter((task) => task.id !== payload),
   }))
 );

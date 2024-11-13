@@ -30,6 +30,10 @@ export class InlineFormComponent {
   constructor(private fb: FormBuilder) {}
 
   edit(): void {
+    if (this.isEditing) {
+      return;
+    }
+
     if (this.title) {
       this.form.patchValue({ title: this.title });
     }

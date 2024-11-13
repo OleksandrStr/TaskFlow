@@ -1,6 +1,10 @@
 import { Router } from 'express';
 import { authMiddleware } from '../middlewares';
-import { boardController, columnController } from '../controllers';
+import {
+  boardController,
+  columnController,
+  taskController,
+} from '../controllers';
 
 export const boardRoutes = Router();
 
@@ -20,3 +24,6 @@ boardRoutes.post(
   authMiddleware,
   columnController.createColumn
 );
+
+boardRoutes.get('/:boardId/tasks', authMiddleware, taskController.getTasks);
+boardRoutes.post('/:boardId/tasks', authMiddleware, taskController.createTask);

@@ -25,6 +25,21 @@
           (click)="deleteColumn(column.id)"
         />
       </div>
+      <div
+        *ngFor="let task of getTasksByColumn(tasks$ | async, column.id)"
+        class="board__task"
+        (click)="openTask(task.id)"
+      >
+        {{ task.title }}
+      </div>
+      <inline-form
+        class="board__task-create"
+        defaultText="Add a card"
+        [hasButton]="true"
+        buttonText="Add card"
+        inputPlaceholder="Enter a title for this card"
+        (submitEvent)="createTask($event, column.id)"
+      ></inline-form>
     </div>
     <inline-form
       class="board__create-column"

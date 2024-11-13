@@ -1,0 +1,53 @@
+<div class="task" *ngIf="task$ | async as task">
+  <div class="task__header">
+    <inline-form
+      class="task__edit"
+      [defaultText]="task.title"
+      [title]="task.title"
+      (submitEvent)="updateTaskTitle($event)"
+    ></inline-form>
+    <img
+      class="task__close"
+      src="/assets/close_icon.svg"
+      (click)="goToBoard()"
+    />
+  </div>
+  <div class="task__body">
+    <div>
+      <form [formGroup]="columnForm" class="task__column">
+        <select
+          #select
+          class="task__column-select"
+          formControlName="columnId"
+          (change)="updateTaskColumn(select.value, task.columnId)"
+        >
+          <option *ngFor="let column of columns$ | async" [value]="column.id">
+            {{ column.title }}
+          </option>
+        </select>
+      </form>
+      <div class="task__description">
+        <div class="task__description-label">Description</div>
+        <inline-form
+          class="task__description-edit"
+          [defaultText]="task.description || 'Add a more detailed description'"
+          [title]="task.description || ''"
+          inputType="textarea"
+          [hasButton]="true"
+          buttonText="Save"
+          (submitEvent)="updateTaskDescription($event)"
+        ></inline-form>
+      </div>
+    </div>
+    <div class="task__actions">
+      <div class="task__actions-label">Actions</div>
+      <div>
+        <div class="task__actions-action" (click)="deleteTask()">
+          <img src="/assets/trash.svg" class="task__actions-icon" />
+          Delete
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="task-backdrop"></div>

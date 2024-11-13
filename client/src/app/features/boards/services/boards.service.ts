@@ -8,12 +8,18 @@ import {
   UpdateColumnInfo,
 } from '../models';
 import { Store } from '@ngrx/store';
-import { BoardsActions, BoardsSelectors } from '../store';
+import { BoardsActions } from '../store/actions';
+import { BoardsSelectors } from '../store/selectors';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable()
 export class BoardsService {
-  constructor(private store: Store<BoardsState>) {}
+  constructor(
+    private store: Store<BoardsState>,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   loadBoards(): void {
     this.store.dispatch(BoardsActions.LoadBoards());
@@ -29,6 +35,11 @@ export class BoardsService {
 
   loadBoard(boardId: string): void {
     this.store.dispatch(BoardsActions.LoadBoard({ payload: boardId }));
+  }
+
+  goToBoard(): void {
+    const boardId = this.route.firstChild.snapshot.paramMap.get('boardId');
+    this.router.navigate(['boards', boardId]);
   }
 
   getCurrentBoard(): Observable<Board> {

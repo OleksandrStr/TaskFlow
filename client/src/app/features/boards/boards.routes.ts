@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { BoardComponent, BoardsComponent } from './components';
+import { BoardComponent, BoardsComponent, TaskComponent } from './components';
 
 export const boardsRoutes: Routes = [
   {
@@ -9,5 +9,11 @@ export const boardsRoutes: Routes = [
   {
     path: 'boards/:boardId',
     component: BoardComponent,
+    children: [
+      {
+        path: 'tasks/:taskId',
+        component: TaskComponent,
+      },
+    ],
   },
 ];
