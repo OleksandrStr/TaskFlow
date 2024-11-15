@@ -12,8 +12,3 @@ export const getCurrentBoard = createSelector(
   getBoardsState,
   (state) => state.currentBoard
 );
-
-export const getColumns = createSelector(
-  getBoardsState,
-  (state) => state.currentColumns
-);

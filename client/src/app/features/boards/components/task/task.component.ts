@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map, Observable, tap } from 'rxjs';
-import { BoardsService, TasksService } from '../../services';
+import { BoardsService, ColumnsService, TasksService } from '../../services';
 import { FormBuilder } from '@angular/forms';
 import { Task } from '../../models';
 
@@ -22,7 +22,7 @@ export class TaskComponent implements OnInit {
   @HostBinding('class') class = 'task-container';
 
   task$: Observable<Task>;
-  columns$ = this.boardsService.getCurrentColumns();
+  columns$ = this.columnsService.getCurrentColumns();
   columnForm = this.fb.group({
     columnId: [null],
   });
@@ -32,6 +32,7 @@ export class TaskComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private boardsService: BoardsService,
+    private columnsService: ColumnsService,
     private tasksService: TasksService,
     private fb: FormBuilder
   ) {}

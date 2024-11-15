@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BoardsService, TasksService } from '../../services';
+import { BoardsService, ColumnsService, TasksService } from '../../services';
 import { Task, CreateTaskInfo } from '../../models';
 
 @Component({
@@ -18,11 +18,12 @@ import { Task, CreateTaskInfo } from '../../models';
 export class BoardComponent implements OnInit {
   boardId = this.route.snapshot.paramMap.get('boardId');
   board$ = this.boardsService.getCurrentBoard();
-  columns$ = this.boardsService.getCurrentColumns();
+  columns$ = this.columnsService.getCurrentColumns();
   tasks$ = this.tasksService.getCurrentTasks();
 
   constructor(
     private boardsService: BoardsService,
+    private columnsService: ColumnsService,
     private tasksService: TasksService,
     private router: Router,
     private route: ActivatedRoute
@@ -30,7 +31,7 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.boardsService.loadBoard(this.boardId);
-    this.boardsService.loadColumns(this.boardId);
+    this.columnsService.loadColumns(this.boardId);
     this.tasksService.loadTasks(this.boardId);
   }
 
@@ -52,7 +53,7 @@ export class BoardComponent implements OnInit {
       title,
       boardId: this.boardId,
     };
-    this.boardsService.createColumn(createColumnInfo);
+    this.columnsService.createColumn(createColumnInfo);
   }
 
   updateColumnTitle(title: string, columnId: string): void {
@@ -60,11 +61,11 @@ export class BoardComponent implements OnInit {
       columnId,
       fields: { title },
     };
-    this.boardsService.updateColumn(updateColumnInfo);
+    this.columnsService.updateColumn(updateColumnInfo);
   }
 
   deleteColumn(columnId: string): void {
-    this.boardsService.deleteColumn(columnId);
+    this.columnsService.deleteColumn(columnId);
   }
 
   getTasksByColumn(tasks: Task[], columnId: string): Task[] {

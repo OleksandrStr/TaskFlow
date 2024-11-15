@@ -56,39 +56,4 @@ export class BoardsEffects {
       )
     )
   );
-
-  loadColumns$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(BoardsActions.LoadColumns),
-      switchMap(({ payload }) => this.boardsConnector.getColumns(payload)),
-      map((columns) => BoardsActions.LoadColumnsSuccess({ payload: columns }))
-    )
-  );
-
-  createColumn$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(BoardsActions.CreateColumn),
-      switchMap(({ payload }) => this.boardsConnector.createColumn(payload)),
-      map((column) => BoardsActions.CreateColumnSuccess({ payload: column }))
-    )
-  );
-
-  updateColumn$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(BoardsActions.UpdateColumn),
-      switchMap(({ payload }) => this.boardsConnector.updateColumn(payload)),
-      map((column) => BoardsActions.UpdateColumnSuccess({ payload: column }))
-    )
-  );
-
-  deleteColumn$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(BoardsActions.DeleteColumn),
-      switchMap(({ payload }) =>
-        this.boardsConnector
-          .deleteColumn(payload)
-          .pipe(map(() => BoardsActions.DeleteColumnSuccess({ payload })))
-      )
-    )
-  );
 }

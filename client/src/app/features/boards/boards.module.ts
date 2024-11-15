@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { BoardComponent, BoardsComponent, TaskComponent } from './components';
 import { RouterModule } from '@angular/router';
 import { boardsRoutes } from './boards.routes';
-import { BoardsService, TasksService } from './services';
+import { BoardsService, ColumnsService, TasksService } from './services';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { BOARDS_FEATURE } from './models';
 import { BoardsEffects, BoardsReducer, TasksEffects } from './store';
-import { BoardsConnector, TasksConnector } from './connectors';
+import {
+  BoardsConnector,
+  ColumnsConnector,
+  TasksConnector,
+} from './connectors';
 import { SharedModule } from '@shared';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +26,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
   ],
   declarations: [BoardsComponent, BoardComponent, TaskComponent],
-  providers: [BoardsService, BoardsConnector, TasksService, TasksConnector],
+  providers: [
+    BoardsService,
+    BoardsConnector,
+    ColumnsService,
+    ColumnsConnector,
+    TasksService,
+    TasksConnector,
+  ],
 })
 export class BoardsModule {}

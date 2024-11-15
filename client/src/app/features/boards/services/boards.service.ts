@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  Board,
-  BoardsState,
-  Column,
-  CreateColumnInfo,
-  UpdateBoardInfo,
-  UpdateColumnInfo,
-} from '../models';
+import { Board, BoardsState, UpdateBoardInfo } from '../models';
 import { Store } from '@ngrx/store';
 import { BoardsActions } from '../store/actions';
 import { BoardsSelectors } from '../store/selectors';
@@ -54,31 +47,5 @@ export class BoardsService {
 
   deleteBoard(boardId: string): void {
     this.store.dispatch(BoardsActions.DeleteBoard({ payload: boardId }));
-  }
-
-  loadColumns(boardId: string): void {
-    this.store.dispatch(BoardsActions.LoadColumns({ payload: boardId }));
-  }
-
-  getCurrentColumns(): Observable<Column[]> {
-    return this.store.select(BoardsSelectors.getColumns);
-  }
-
-  createColumn(createColumnInfo: CreateColumnInfo): void {
-    this.store.dispatch(
-      BoardsActions.CreateColumn({ payload: createColumnInfo })
-    );
-  }
-
-  updateColumn(updateColumnInfo: UpdateColumnInfo): void {
-    this.store.dispatch(
-      BoardsActions.UpdateColumn({
-        payload: updateColumnInfo,
-      })
-    );
-  }
-
-  deleteColumn(columnId: string): void {
-    this.store.dispatch(BoardsActions.DeleteColumn({ payload: columnId }));
   }
 }
