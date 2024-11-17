@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, tap } from 'rxjs';
 import { TasksActions } from '../actions';
 import { TasksConnector } from '../../connectors';
-import { BoardsService } from '../../services/boards.service';
+import { BoardsService } from '../../../boards/services';
 
 @Injectable()
 export class TasksEffects {

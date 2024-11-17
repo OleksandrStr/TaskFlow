@@ -1,12 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
-import { BoardsActions, ColumnsActions, TasksActions } from '../actions';
+import { BoardsActions } from '../actions';
 import { BoardsState } from '../../models';
 
-const initialBoardsState: BoardsState = {
+export const initialBoardsState: BoardsState = {
   boards: null,
   currentBoard: null,
-  currentColumns: null,
-  currentTasks: null,
 };
 
 export const BoardsReducer = createReducer(
@@ -30,43 +28,5 @@ export const BoardsReducer = createReducer(
   on(BoardsActions.DeleteBoardSuccess, (state, { payload }) => ({
     ...state,
     boards: state.boards.filter((board) => board.id !== payload),
-  })),
-  on(ColumnsActions.LoadColumnsSuccess, (state, { payload }) => ({
-    ...state,
-    currentColumns: payload,
-  })),
-  on(ColumnsActions.CreateColumnSuccess, (state, { payload }) => ({
-    ...state,
-    currentColumns: [...state.currentColumns, payload],
-  })),
-  on(ColumnsActions.UpdateColumnSuccess, (state, { payload }) => ({
-    ...state,
-    currentColumns: state.currentColumns.map((column) =>
-      column.id === payload.id ? payload : column
-    ),
-  })),
-  on(ColumnsActions.DeleteColumnSuccess, (state, { payload }) => ({
-    ...state,
-    currentColumns: state.currentColumns.filter(
-      (column) => column.id !== payload
-    ),
-  })),
-  on(TasksActions.LoadTasksSuccess, (state, { payload }) => ({
-    ...state,
-    currentTasks: payload,
-  })),
-  on(TasksActions.CreateTaskSuccess, (state, { payload }) => ({
-    ...state,
-    currentTasks: [...state.currentTasks, payload],
-  })),
-  on(TasksActions.UpdateTaskSuccess, (state, { payload }) => ({
-    ...state,
-    currentTasks: state.currentTasks.map((task) =>
-      task.id === payload.id ? payload : task
-    ),
-  })),
-  on(TasksActions.DeleteTaskSuccess, (state, { payload }) => ({
-    ...state,
-    currentTasks: state.currentTasks.filter((task) => task.id !== payload),
   }))
 );

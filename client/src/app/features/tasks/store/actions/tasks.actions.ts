@@ -1,17 +1,17 @@
 import { createAction, props } from '@ngrx/store';
 import { Task, CreateTaskInfo, UpdateTaskInfo } from '../../models';
 
-const LOAD_TASKS = '[Boards] Load Tasks';
-const LOAD_TASKS_SUCCESS = '[Boards] Load Tasks Success';
+const LOAD_TASKS = '[Tasks] Load Tasks';
+const LOAD_TASKS_SUCCESS = '[Tasks] Load Tasks Success';
 
-const CREATE_TASK = '[Boards] Create Task';
-const CREATE_TASK_SUCCESS = '[Boards] Create Task Success';
+const CREATE_TASK = '[Tasks] Create Task';
+const CREATE_TASK_SUCCESS = '[Tasks] Create Task Success';
 
-const UPDATE_TASK = '[Boards] Update Task';
-const UPDATE_TASK_SUCCESS = '[Boards] Update Task Success';
+const UPDATE_TASK = '[Tasks] Update Task';
+const UPDATE_TASK_SUCCESS = '[Tasks] Update Task Success';
 
-const DELETE_TASK = '[Boards] Delete Task';
-const DELETE_TASK_SUCCESS = '[Boards] Delete Task Success';
+const DELETE_TASK = '[Tasks] Delete Task';
+const DELETE_TASK_SUCCESS = '[Tasks] Delete Task Success';
 
 export const LoadTasks = createAction(LOAD_TASKS, props<{ payload: string }>());
 export const LoadTasksSuccess = createAction(

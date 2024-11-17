@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
-  BoardsState,
   Column,
+  ColumnsState,
   CreateColumnInfo,
   UpdateColumnInfo,
 } from '../models';
@@ -11,13 +11,13 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ColumnsService {
-  constructor(private store: Store<BoardsState>) {}
+  constructor(private store: Store<ColumnsState>) {}
 
   loadColumns(boardId: string): void {
     this.store.dispatch(ColumnsActions.LoadColumns({ payload: boardId }));
   }
 
-  getCurrentColumns(): Observable<Column[]> {
+  getColumns(): Observable<Column[]> {
     return this.store.select(ColumnsSelectors.getColumns);
   }
 

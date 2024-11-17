@@ -1,3 +1,5 @@
+export const TASKS_FEATURE = 'tasks';
+
 export interface Task {
   id: string;
   title: string;
@@ -5,6 +7,10 @@ export interface Task {
   columnId: string;
   boardId: string;
   userId: string;
+}
+
+export interface TasksState {
+  tasks: Task[];
 }
 
 export interface CreateTaskInfo {

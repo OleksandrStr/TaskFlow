@@ -5,8 +5,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BoardsService, ColumnsService, TasksService } from '../../services';
-import { Task, CreateTaskInfo } from '../../models';
+import { BoardsService } from '../../services';
+import { ColumnsService } from '../../../columns';
+import { Task, CreateTaskInfo, TasksService } from '../../../tasks';
 
 @Component({
   selector: 'board',
@@ -18,8 +19,8 @@ import { Task, CreateTaskInfo } from '../../models';
 export class BoardComponent implements OnInit {
   boardId = this.route.snapshot.paramMap.get('boardId');
   board$ = this.boardsService.getCurrentBoard();
-  columns$ = this.columnsService.getCurrentColumns();
-  tasks$ = this.tasksService.getCurrentTasks();
+  columns$ = this.columnsService.getColumns();
+  tasks$ = this.tasksService.getTasks();
 
   constructor(
     private boardsService: BoardsService,

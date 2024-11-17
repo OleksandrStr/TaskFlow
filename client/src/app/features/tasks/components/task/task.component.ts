@@ -7,9 +7,11 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, map, Observable, tap } from 'rxjs';
-import { BoardsService, ColumnsService, TasksService } from '../../services';
+import { TasksService } from '../../services';
 import { FormBuilder } from '@angular/forms';
 import { Task } from '../../models';
+import { ColumnsService } from '../../../columns';
+import { BoardsService } from '../../../boards/services';
 
 @Component({
   selector: 'task',
@@ -22,7 +24,7 @@ export class TaskComponent implements OnInit {
   @HostBinding('class') class = 'task-container';
 
   task$: Observable<Task>;
-  columns$ = this.columnsService.getCurrentColumns();
+  columns$ = this.columnsService.getColumns();
   columnForm = this.fb.group({
     columnId: [null],
   });
@@ -38,7 +40,7 @@ export class TaskComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.task$ = this.tasksService.getCurrentTasks().pipe(
+    this.task$ = this.tasksService.getTasks().pipe(
       map((tasks) => tasks?.find((task) => task.id === this.taskId)),
       filter(Boolean),
       tap((task) => this.columnForm.patchValue({ columnId: task.columnId }))
