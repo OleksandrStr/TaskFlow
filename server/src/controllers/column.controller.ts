@@ -8,11 +8,6 @@ export const getColumns = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const columns = await ColumnModel.find({ boardId: req.params.boardId });
     res.send(columns);
   } catch (error) {
@@ -26,11 +21,6 @@ export const createColumn = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const newColumn = new ColumnModel({
       title: req.body.title,
       boardId: req.params.boardId,
@@ -49,11 +39,6 @@ export const updateColumn = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const updatedColumn = await ColumnModel.findByIdAndUpdate(
       req.params.columnId,
       req.body.fields,
@@ -71,11 +56,6 @@ export const deleteColumn = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     await ColumnModel.deleteOne({ _id: req.params.columnId });
     res.status(200).send();
   } catch (error) {

@@ -8,11 +8,6 @@ export const getTasks = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const tasks = await TaskModel.find({ boardId: req.params.boardId });
     res.send(tasks);
   } catch (err) {
@@ -26,11 +21,6 @@ export const createTask = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const newTask = new TaskModel({
       title: req.body.title,
       boardId: req.params.boardId,
@@ -50,11 +40,6 @@ export const updateTask = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const updatedTask = await TaskModel.findByIdAndUpdate(
       req.params.taskId,
       req.body.fields,
@@ -72,11 +57,6 @@ export const deleteTask = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     await TaskModel.deleteOne({ _id: req.params.taskId });
     res.status(200).send();
   } catch (error) {

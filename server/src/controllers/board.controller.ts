@@ -8,11 +8,6 @@ export const getBoards = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const boards = await BoardModel.find({ userId: req.user.id });
     res.send(boards);
   } catch (error) {
@@ -26,11 +21,6 @@ export const createBoard = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const newBoard = new BoardModel({
       title: req.body.title,
       userId: req.user.id,
@@ -48,11 +38,6 @@ export const getBoard = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const board = await BoardModel.findById(req.params.boardId);
     res.send(board);
   } catch (error) {
@@ -66,11 +51,6 @@ export const updateBoard = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     const updatedBoard = await BoardModel.findByIdAndUpdate(
       req.params.boardId,
       req.body.fields,
@@ -88,11 +68,6 @@ export const deleteBoard = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    if (!req.user) {
-      res.sendStatus(401);
-      return;
-    }
-
     await BoardModel.deleteOne({ _id: req.params.boardId });
     res.status(200).send();
   } catch (error) {
