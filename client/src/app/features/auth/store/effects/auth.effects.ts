@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, iif, map, of, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../services';
 import { Router } from '@angular/router';
@@ -63,9 +63,21 @@ export class AuthEffects {
 
   getCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.GetCurrentUser),
-      switchMap(() => this.authConnector.getCurrentUser()),
-      map((user) => AuthActions.GetCurrentUserSuccess({ payload: user }))
+      ofType(AuthActions.LoadCurrentUser),
+      switchMap(() =>
+        iif(
+          () => !!this.authService.getToken(),
+          this.authConnector
+            .getCurrentUser()
+            .pipe(
+              map((user) =>
+                AuthActions.LoadCurrentUserSuccess({ payload: user })
+              )
+            ),
+          of(AuthActions.LoadCurrentUserError())
+        )
+      ),
+      catchError(() => of(AuthActions.LoadCurrentUserError()))
     )
   );
 }

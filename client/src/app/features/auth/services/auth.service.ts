@@ -1,37 +1,43 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import {
   AuthLocalStorageKey,
   AuthState,
-  LoginRequest,
-  RegisterRequest,
+  LoginInfo,
+  RegisterInfo,
+  User,
 } from '../models';
 import { Store } from '@ngrx/store';
 import { UserResponse } from '@common';
 import { AuthActions } from '../store/actions';
 import { AuthSelectors } from '../store/selectors';
+import { isDefined } from '@shared';
 
 @Injectable()
 export class AuthService {
   constructor(private store: Store<AuthState>) {}
 
-  currentUser$ = this.store.select(AuthSelectors.getUser);
+  currentUser$ = this.getCurrentUser();
   isLoggedIn$ = this.currentUser$.pipe(map(Boolean));
 
-  register(registerRequest: RegisterRequest): void {
-    this.store.dispatch(AuthActions.RegisterUser({ payload: registerRequest }));
+  register(registerInfo: RegisterInfo): void {
+    this.store.dispatch(AuthActions.RegisterUser({ payload: registerInfo }));
   }
 
-  login(loginRequest: LoginRequest): void {
-    this.store.dispatch(AuthActions.Login({ payload: loginRequest }));
+  login(loginInfo: LoginInfo): void {
+    this.store.dispatch(AuthActions.Login({ payload: loginInfo }));
   }
 
   logout(): void {
     this.store.dispatch(AuthActions.Logout());
   }
 
-  getCurrentUser(): void {
-    this.store.dispatch(AuthActions.GetCurrentUser());
+  loadCurrentUser(): void {
+    this.store.dispatch(AuthActions.LoadCurrentUser());
+  }
+
+  getCurrentUser(): Observable<User> {
+    return this.store.select(AuthSelectors.getUser).pipe(filter(isDefined));
   }
 
   getError(): Observable<string> {

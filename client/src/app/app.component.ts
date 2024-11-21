@@ -10,10 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    const authToken = this.authService.getToken();
-
-    if (authToken) {
-      this.authService.getCurrentUser();
-    }
+    this.authService.loadCurrentUser();
   }
 }

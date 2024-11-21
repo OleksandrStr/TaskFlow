@@ -11,13 +11,13 @@ export interface AuthState {
   error: string;
 }
 
-export interface RegisterRequest {
+export interface RegisterInfo {
   email: string;
   username: string;
   password: string;
 }
 
-export interface LoginRequest {
+export interface LoginInfo {
   email: string;
   password: string;
 }

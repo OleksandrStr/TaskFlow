@@ -3,7 +3,7 @@ import { AuthActions } from '../actions';
 import { AuthState } from '../../models';
 
 const initialAuthState: AuthState = {
-  user: null,
+  user: undefined,
   error: '',
 };
 
@@ -12,7 +12,7 @@ export const AuthReducer = createReducer(
   on(
     AuthActions.RegisterUserSuccess,
     AuthActions.LoginSuccess,
-    AuthActions.GetCurrentUserSuccess,
+    AuthActions.LoadCurrentUserSuccess,
     (_state, { payload }) => ({
       user: {
         id: payload.id,
@@ -22,7 +22,10 @@ export const AuthReducer = createReducer(
       error: '',
     })
   ),
-  on(AuthActions.Logout, (_state, _action) => initialAuthState),
+  on(AuthActions.Logout, (_state, _action) => ({
+    user: null,
+    error: '',
+  })),
   on(AuthActions.CleanAuthError, (state, _action) => ({
     ...state,
     error: '',
@@ -34,5 +37,9 @@ export const AuthReducer = createReducer(
       ...state,
       error: err.error.error || err.error.join(', '),
     })
-  )
+  ),
+  on(AuthActions.LoadCurrentUserError, (state, _action) => ({
+    ...state,
+    user: null,
+  }))
 );

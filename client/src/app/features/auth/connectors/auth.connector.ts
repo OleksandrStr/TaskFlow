@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest, RegisterRequest } from '../models';
+import { LoginInfo, RegisterInfo } from '../models';
 import { environment } from '@environment';
 import { UserResponse } from '@common';
 import { Observable } from 'rxjs';
@@ -9,14 +9,14 @@ import { Observable } from 'rxjs';
 export class AuthConnector {
   constructor(private http: HttpClient) {}
 
-  register(registerRequest: RegisterRequest): Observable<UserResponse> {
+  register(registerInfo: RegisterInfo): Observable<UserResponse> {
     const url = environment.apiUrl + '/users/register';
-    return this.http.post<UserResponse>(url, registerRequest);
+    return this.http.post<UserResponse>(url, registerInfo);
   }
 
-  login(loginRequest: LoginRequest): Observable<UserResponse> {
+  login(loginInfo: LoginInfo): Observable<UserResponse> {
     const url = environment.apiUrl + '/users/login';
-    return this.http.post<UserResponse>(url, loginRequest);
+    return this.http.post<UserResponse>(url, loginInfo);
   }
 
   getCurrentUser(): Observable<UserResponse> {
