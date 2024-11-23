@@ -44,14 +44,23 @@
     }
 
     &--logout {
-      width: 86px;
+      width: fit-content;
       padding: 5px 9px;
       cursor: pointer;
     }
   }
 
   &__logo {
+    min-width: 50%;
     height: 32px;
     margin: 0 auto;
+  }
+}
+
+@media (min-width: 576px) {
+  .nav-bar {
+    &__icon--logout {
+      width: 86px;
+    }
   }
 }

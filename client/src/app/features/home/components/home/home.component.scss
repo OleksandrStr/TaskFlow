@@ -1,11 +1,13 @@
 .home-header {
   position: fixed;
-  height: 72px;
-  z-index: 1;
   width: 100%;
+  height: auto;
+  padding: 12px;
+  z-index: 1;
   background-color: #0079bf;
-  padding: 16px;
   display: flex;
+  flex-direction: column;
+  row-gap: 10px;
   align-items: center;
   justify-content: space-between;
 
@@ -17,68 +19,162 @@
     color: #fff;
     text-decoration: none;
     font-weight: 700;
-    font-size: 17px;
-    margin-right: 20px;
+    font-size: 15px;
+    margin-right: 10px;
+    padding: 4px 8px;
+    line-height: 20px;
   }
 
   &__register {
     color: #5067c5;
     background: #fff;
     font-weight: 700;
-    font-size: 17px;
-    padding: 6px 10px;
+    font-size: 15px;
+    padding: 4px 8px;
     text-decoration: none;
     border-radius: 3px;
-    line-height: 26px;
+    line-height: 20px;
   }
 }
 
 .home-hero {
   background: linear-gradient(135deg, #0079bf, #5067c5);
+  padding: 60px 0;
 }
 
 .home-container {
-  max-width: 1140px;
-  color: #fff;
   display: flex;
-  margin: 0 auto;
+  flex-direction: column;
+  text-align: center;
   align-items: center;
-  padding-bottom: 80px;
-  padding-top: 80px;
-  justify-content: space-between;
+  max-width: 100%;
+  color: #fff;
+  margin: 0 auto;
+  padding: 50px 20px 20px;
 
   &__title {
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 600;
     margin-bottom: 8px;
   }
 
   &__description {
-    font-size: 25px;
+    font-size: 18px;
     font-weight: 300;
   }
 
   &__left-part {
-    margin-right: 40px;
+    margin-right: 0;
   }
 
-  &--team {
-    color: #2c3e50;
+  &__image {
+    max-width: 100%;
+    margin-top: 20px;
+  }
 
-    .home-container__image {
-      max-width: 700px;
-    }
+  &--team,
+  &--information,
+  &--workflow {
+    color: #2c3e50;
   }
 
   &--information {
-    color: #2c3e50;
+    .home-container__image {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .home-header {
+    padding: 14px;
+    flex-direction: row;
+    height: 72px;
+
+    &__login {
+      font-size: 17px;
+      margin-right: 20px;
+      padding: 0;
+      line-height: normal;
+    }
+
+    &__register {
+      font-size: 17px;
+      padding: 6px 10px;
+      line-height: 26px;
+    }
   }
 
-  &--workflow {
-    color: #2c3e50;
+  .home-hero {
+    padding: 0;
+  }
 
-    .home-container__image {
-      max-width: 450px;
+  .home-container {
+    flex-direction: column;
+    padding: 80px 40px 40px;
+
+    &__title {
+      font-size: 40px;
+    }
+
+    &__description {
+      font-size: 22px;
+    }
+
+    &__image {
+      max-width: 500px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .home-container {
+    flex-direction: row;
+    max-width: 960px;
+    text-align: start;
+    padding: 80px 0;
+    justify-content: space-between;
+
+    &__title {
+      font-size: 42px;
+    }
+
+    &__description {
+      font-size: 24px;
+    }
+
+    &__left-part {
+      margin-right: 40px;
+    }
+
+    &__image {
+      max-width: 600px;
+      margin-top: 0;
+    }
+
+    &--information {
+      .home-container__image {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .home-container {
+    max-width: 1140px;
+    padding: 80px 0;
+
+    &__title {
+      font-size: 48px;
+    }
+
+    &__description {
+      font-size: 25px;
+    }
+
+    &__image {
+      max-width: 700px;
     }
   }
 }
