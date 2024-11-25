@@ -1,15 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AuthService } from './features';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
-  constructor(private authService: AuthService) {}
-
-  ngOnInit(): void {
-    this.authService.loadCurrentUser();
-  }
-}
+export class AppComponent {}

@@ -16,7 +16,7 @@ const storeDevtools: ModuleWithProviders<StoreDevtoolsModule> | [] =
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     HomeModule,

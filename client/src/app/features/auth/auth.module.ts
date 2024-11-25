@@ -1,6 +1,6 @@
 import { RouterModule } from '@angular/router';
 import { LoginComponent, RegistrationComponent } from './components';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
@@ -14,6 +14,10 @@ import { AuthService } from './services';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors';
 
+function loadCurrentUser(authService: AuthService): () => void {
+  return () => authService.loadCurrentUser();
+}
+
 @NgModule({
   imports: [
     RouterModule.forChild(authRoutes),
@@ -26,6 +30,12 @@ import { AuthInterceptor } from './interceptors';
     AuthService,
     AuthConnector,
     AuthGuard,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadCurrentUser,
+      deps: [AuthService],
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
