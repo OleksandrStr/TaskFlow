@@ -6,7 +6,6 @@ import { AuthService } from '../../services';
 import { Router } from '@angular/router';
 import { AuthActions } from '../actions';
 import { AuthConnector } from '../../connectors';
-import { AuthLocalStorageKey } from '../../models';
 
 @Injectable()
 export class AuthEffects {
@@ -54,7 +53,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.Logout),
         tap(() => {
-          localStorage.removeItem(AuthLocalStorageKey.AUTH_TOKEN);
+          this.authService.deleteToken();
           this.router.navigateByUrl('/');
         })
       ),

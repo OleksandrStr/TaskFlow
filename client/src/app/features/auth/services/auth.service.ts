@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { filter, map, Observable } from 'rxjs';
 import {
-  AuthLocalStorageKey,
+  AuthCookiesKey,
   AuthState,
   LoginInfo,
   RegisterInfo,
@@ -12,10 +12,14 @@ import { UserResponse } from '@common';
 import { AuthActions } from '../store/actions';
 import { AuthSelectors } from '../store/selectors';
 import { isDefined } from '@shared';
+import { SsrCookieService } from 'ngx-cookie-service-ssr';
 
 @Injectable()
 export class AuthService {
-  constructor(private store: Store<AuthState>) {}
+  constructor(
+    private cookieService: SsrCookieService,
+    private store: Store<AuthState>
+  ) {}
 
   currentUser$ = this.getCurrentUser();
   isLoggedIn$ = this.currentUser$.pipe(map(Boolean));
@@ -49,10 +53,19 @@ export class AuthService {
   }
 
   getToken(): string {
-    return localStorage.getItem(AuthLocalStorageKey.AUTH_TOKEN);
+    return this.cookieService.get(AuthCookiesKey.AUTH_TOKEN);
   }
 
   setToken(user: UserResponse): void {
-    localStorage.setItem(AuthLocalStorageKey.AUTH_TOKEN, user.token);
+    this.cookieService.set(AuthCookiesKey.AUTH_TOKEN, user.token, {
+      path: '/',
+      secure: true,
+      sameSite: 'Strict',
+      expires: 7,
+    });
+  }
+
+  deleteToken(): void {
+    this.cookieService.delete(AuthCookiesKey.AUTH_TOKEN);
   }
 }
