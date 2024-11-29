@@ -1,9 +1,18 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./features/home/home.module').then((m) => m.HomeModule),
+  },
+];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot([], {
+    RouterModule.forRoot(routes, {
       initialNavigation: 'enabledBlocking',
     }),
   ],

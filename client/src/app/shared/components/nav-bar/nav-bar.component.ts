@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthService } from '../../../features';
+import { AuthService } from '../../../features/auth';
 
 @Component({
   selector: 'nav-bar',
