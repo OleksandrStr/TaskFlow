@@ -21,27 +21,11 @@ export class BoardsEffects {
     )
   );
 
-  loadBoard$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(BoardsActions.LoadBoard),
-      switchMap(({ payload }) => this.boardsConnector.getBoard(payload)),
-      map((board) => BoardsActions.LoadBoardSuccess({ payload: board }))
-    )
-  );
-
   createBoard$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BoardsActions.CreateBoard),
       switchMap(({ payload }) => this.boardsConnector.createBoard(payload)),
       map((board) => BoardsActions.CreateBoardSuccess({ payload: board }))
-    )
-  );
-
-  updateBoard$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(BoardsActions.UpdateBoard),
-      switchMap(({ payload }) => this.boardsConnector.updateBoard(payload)),
-      map((board) => BoardsActions.UpdateBoardSuccess({ payload: board }))
     )
   );
 

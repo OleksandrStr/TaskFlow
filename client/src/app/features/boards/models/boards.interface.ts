@@ -10,10 +10,4 @@ export interface Board {
 
 export interface BoardsState {
   boards: Board[];
-  currentBoard: Board;
-}
-
-export interface UpdateBoardInfo {
-  boardId: string;
-  fields: { title: string };
 }

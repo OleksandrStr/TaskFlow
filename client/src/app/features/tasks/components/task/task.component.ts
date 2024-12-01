@@ -11,7 +11,7 @@ import { TasksService } from '../../services';
 import { FormBuilder } from '@angular/forms';
 import { Task } from '../../models';
 import { ColumnsService } from '../../../columns';
-import { BoardsService } from '../../../boards/services';
+import { BoardService } from '../../../board/services';
 
 @Component({
   selector: 'task',
@@ -33,7 +33,7 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private boardsService: BoardsService,
+    private boardService: BoardService,
     private columnsService: ColumnsService,
     private tasksService: TasksService,
     private fb: FormBuilder
@@ -48,7 +48,7 @@ export class TaskComponent implements OnInit {
   }
 
   goToBoard(): void {
-    this.boardsService.goToBoard();
+    this.boardService.goToBoard();
   }
 
   updateTaskTitle(title: string): void {

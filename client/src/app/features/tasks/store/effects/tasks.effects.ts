@@ -3,13 +3,13 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, tap } from 'rxjs';
 import { TasksActions } from '../actions';
 import { TasksConnector } from '../../connectors';
-import { BoardsService } from '../../../boards/services';
+import { BoardService } from '../../../board/services';
 
 @Injectable()
 export class TasksEffects {
   constructor(
     private actions$: Actions,
-    private boardsService: BoardsService,
+    private boardService: BoardService,
     private tasksConnector: TasksConnector
   ) {}
 
@@ -43,7 +43,7 @@ export class TasksEffects {
       switchMap(({ payload }) =>
         this.tasksConnector.deleteTask(payload).pipe(
           map(() => TasksActions.DeleteTaskSuccess({ payload })),
-          tap(() => this.boardsService.goToBoard())
+          tap(() => this.boardService.goToBoard())
         )
       )
     )

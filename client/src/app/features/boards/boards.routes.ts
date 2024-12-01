@@ -1,23 +1,16 @@
 import { Routes } from '@angular/router';
-import { BoardComponent, BoardsComponent } from './components';
-import { TaskComponent } from '../tasks';
+import { BoardsComponent } from './components';
 import { AuthGuard } from '../auth/guards';
 
 export const boardsRoutes: Routes = [
   {
-    path: 'boards',
+    path: '',
     component: BoardsComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'boards/:boardId',
-    component: BoardComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'tasks/:taskId',
-        component: TaskComponent,
-      },
-    ],
+    path: ':boardId',
+    loadChildren: () =>
+      import('./../board/board.module').then((m) => m.BoardModule),
   },
 ];

@@ -5,9 +5,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BoardsService } from '../../services';
+import { BoardService } from '../../services';
 import { ColumnsService } from '../../../columns';
 import { Task, CreateTaskInfo, TasksService } from '../../../tasks';
+import { BoardsService } from '../../../boards/services';
 
 @Component({
   selector: 'board',
@@ -18,12 +19,13 @@ import { Task, CreateTaskInfo, TasksService } from '../../../tasks';
 })
 export class BoardComponent implements OnInit {
   boardId = this.route.snapshot.paramMap.get('boardId');
-  board$ = this.boardsService.getCurrentBoard();
+  board$ = this.boardService.getCurrentBoard();
   columns$ = this.columnsService.getColumns();
   tasks$ = this.tasksService.getTasks();
 
   constructor(
     private boardsService: BoardsService,
+    private boardService: BoardService,
     private columnsService: ColumnsService,
     private tasksService: TasksService,
     private router: Router,
@@ -31,13 +33,13 @@ export class BoardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.boardsService.loadBoard(this.boardId);
+    this.boardService.loadBoard(this.boardId);
     this.columnsService.loadColumns(this.boardId);
     this.tasksService.loadTasks(this.boardId);
   }
 
   updateBoardTitle(title: string): void {
-    this.boardsService.updateBoard({
+    this.boardService.updateBoard({
       boardId: this.boardId,
       fields: { title },
     });
