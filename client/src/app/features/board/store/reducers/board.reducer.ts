@@ -15,5 +15,9 @@ export const BoardReducer = createReducer(
   on(BoardActions.UpdateBoardSuccess, (state, { payload }) => ({
     ...state,
     board: payload,
+  })),
+  on(BoardActions.CleanCurrentBoard, (state) => ({
+    ...state,
+    board: null,
   }))
 );

@@ -32,4 +32,8 @@ export class BoardService {
   updateBoard(updateBoardInfo: UpdateBoardInfo): void {
     this.store.dispatch(BoardActions.UpdateBoard({ payload: updateBoardInfo }));
   }
+
+  cleanCurrentBoard(): void {
+    this.store.dispatch(BoardActions.CleanCurrentBoard());
+  }
 }

@@ -8,6 +8,8 @@ const LOAD_BOARD_SUCCESS = '[Board] Load Board Success';
 const UPDATE_BOARD = '[Board] Update Board';
 const UPDATE_BOARD_SUCCESS = '[Board] Update Board Success';
 
+const CLEAN_CURRENT_BOARD = '[Board] Clean Current Board';
+
 export const LoadBoard = createAction(LOAD_BOARD, props<{ payload: string }>());
 export const LoadBoardSuccess = createAction(
   LOAD_BOARD_SUCCESS,
@@ -22,3 +24,5 @@ export const UpdateBoardSuccess = createAction(
   UPDATE_BOARD_SUCCESS,
   props<{ payload: Board }>()
 );
+
+export const CleanCurrentBoard = createAction(CLEAN_CURRENT_BOARD);

@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
@@ -17,7 +18,7 @@ import { BoardsService } from '../../../boards/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   boardId = this.route.snapshot.paramMap.get('boardId');
   board$ = this.boardService.getCurrentBoard();
   columns$ = this.columnsService.getColumns();
@@ -36,6 +37,10 @@ export class BoardComponent implements OnInit {
     this.boardService.loadBoard(this.boardId);
     this.columnsService.loadColumns(this.boardId);
     this.tasksService.loadTasks(this.boardId);
+  }
+
+  ngOnDestroy(): void {
+    this.boardService.cleanCurrentBoard();
   }
 
   updateBoardTitle(title: string): void {
