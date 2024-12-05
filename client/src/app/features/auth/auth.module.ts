@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { AUTH_FEATURE } from './models';
 import { AuthEffects, AuthReducer } from './store';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthGuard } from './guards';
+import { AuthGuard, NoAuthGuard } from './guards';
 import { AuthConnector } from './connectors';
 import { authRoutes } from './auth.routes';
 import { AuthService } from './services';
@@ -30,6 +30,7 @@ function loadCurrentUser(authService: AuthService): () => void {
     AuthService,
     AuthConnector,
     AuthGuard,
+    NoAuthGuard,
     {
       provide: APP_INITIALIZER,
       useFactory: loadCurrentUser,

@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components';
-import { HomeGuard } from './guards';
+import { NoAuthGuard } from '../auth/guards';
 
 export const homeRoutes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [HomeGuard],
+    canActivate: [NoAuthGuard],
   },
 ];

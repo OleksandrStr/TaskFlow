@@ -1,10 +1,10 @@
 import { CanActivate, Router, UrlTree } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { AuthService } from '../../auth';
+import { AuthService } from '../services';
 
 @Injectable()
-export class HomeGuard implements CanActivate {
+export class NoAuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router
