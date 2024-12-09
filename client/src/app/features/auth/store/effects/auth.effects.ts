@@ -19,15 +19,18 @@ export class AuthEffects {
   registerUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.RegisterUser),
-      switchMap(({ payload }) => this.authConnector.register(payload)),
-      map((user) => {
-        this.authService.setToken(user);
-        this.router.navigateByUrl('/');
+      switchMap(({ payload }) =>
+        this.authConnector.register(payload).pipe(
+          map((user) => {
+            this.authService.setToken(user);
+            this.router.navigateByUrl('/');
 
-        return AuthActions.RegisterUserSuccess({ payload: user });
-      }),
-      catchError((err: HttpErrorResponse) =>
-        of(AuthActions.RegisterUserError({ err }))
+            return AuthActions.RegisterUserSuccess({ payload: user });
+          }),
+          catchError((err: HttpErrorResponse) =>
+            of(AuthActions.RegisterUserError({ err }))
+          )
+        )
       )
     )
   );
@@ -35,15 +38,18 @@ export class AuthEffects {
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.Login),
-      switchMap(({ payload }) => this.authConnector.login(payload)),
-      map((user) => {
-        this.authService.setToken(user);
-        this.router.navigateByUrl('/');
+      switchMap(({ payload }) =>
+        this.authConnector.login(payload).pipe(
+          map((user) => {
+            this.authService.setToken(user);
+            this.router.navigateByUrl('/');
 
-        return AuthActions.LoginSuccess({ payload: user });
-      }),
-      catchError((err: HttpErrorResponse) =>
-        of(AuthActions.LoginError({ err }))
+            return AuthActions.LoginSuccess({ payload: user });
+          }),
+          catchError((err: HttpErrorResponse) =>
+            of(AuthActions.LoginError({ err }))
+          )
+        )
       )
     )
   );
@@ -66,17 +72,15 @@ export class AuthEffects {
       switchMap(() =>
         iif(
           () => !!this.authService.getToken(),
-          this.authConnector
-            .getCurrentUser()
-            .pipe(
-              map((user) =>
-                AuthActions.LoadCurrentUserSuccess({ payload: user })
-              )
+          this.authConnector.getCurrentUser().pipe(
+            map((user) =>
+              AuthActions.LoadCurrentUserSuccess({ payload: user })
             ),
+            catchError(() => of(AuthActions.LoadCurrentUserError()))
+          ),
           of(AuthActions.LoadCurrentUserError())
         )
-      ),
-      catchError(() => of(AuthActions.LoadCurrentUserError()))
+      )
     )
   );
 }

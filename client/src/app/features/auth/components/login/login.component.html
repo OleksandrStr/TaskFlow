@@ -4,9 +4,7 @@
   </a>
   <div class="login__form">
     <div class="login__form-header">Log in to TaskFlow</div>
-    <div *ngIf="error$ | async as error" class="login__form-error">
-      {{ error }}
-    </div>
+    <div class="login__form-error">{{ error$ | async }}</div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <input
         formControlName="email"
